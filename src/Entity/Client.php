@@ -10,26 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
 class Client extends Utilisateur
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\Column(type="date")
      */
     private $date_inscription;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="date")
      */
     private $date_naissance;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getDateInscription(): ?\DateTimeInterface
     {
@@ -43,15 +31,23 @@ class Client extends Utilisateur
         return $this;
     }
 
-    public function getDateNaissance(): ?string
+    /**
+     * @return mixed
+     */
+    public function getDateNaissance(): ?\DateTimeInterface
     {
         return $this->date_naissance;
     }
 
-    public function setDateNaissance(string $date_naissance): self
+    /**
+     * @param mixed $date_naissance
+     */
+    public function setDateNaissance(\DateTimeInterface $date_naissance): self
     {
         $this->date_naissance = $date_naissance;
 
         return $this;
     }
+
+
 }

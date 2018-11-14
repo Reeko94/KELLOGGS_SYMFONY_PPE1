@@ -5,10 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @DiscriminatorMap({"utilisateur"="Utilisateur", "commercial" = "Commercial", "client" = "Client"})
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  * @UniqueEntity("email")
  */
@@ -40,6 +44,11 @@ class Utilisateur implements UserInterface,\Serializable
      * @ORM\Column(type="string", length=255)
      */
     private $prenom;
+
+    /**
+     * @var string $discr
+     */
+    private $discr;
 
     public function getId(): ?int
     {
@@ -93,6 +102,25 @@ class Utilisateur implements UserInterface,\Serializable
 
         return $this;
     }
+
+    /**
+     * @param string $discr
+     */
+    public function getDiscr(): ?string
+    {
+        return $this->discr;
+    }
+
+    /**
+     * @return string
+     */
+    public function setDiscr(string $discr): self
+    {
+        $this->discr = $discr;
+
+        return $this;
+    }
+
 
     /**
      * Returns the salt that was originally used to encode the password.
