@@ -1,0 +1,63 @@
+{% extends('base.html.twig') %}
+{% block body %}
+    <div class="container">
+        <div class="col-md-4 offset-md-4 mt-3 mb-3">
+            <h1>Dates clés</h1>
+        </div>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">En 1898</h1>
+                <p class="lead">Lors d’une tentative pour fabriquer du granola, le fondateur de notre entreprise, W.K Kellogg et son frère le Dr John Harvey Kellogg, ont changé le petit déjeuner à tout jamais. Par accident, ils fabriquent des pétales de blé. En appliquant le même processus à des grains de maïs, il inventent la délicieuse recette du corn flake (pétale de maïs).</p>
+            </div>
+        </div>
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Au cours du XXème siècle
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"><span class="font-weight-bold">1906</span> - W.K. Kellogg fonde la Battle Creek Toasted Corn Flake Company et embauche ses 44 premiers collaborateurs. Ensemble, ils créent les céréales Kellogg’s ® Corn Flakes ® et mettent en pratique la vision de W.K. Kellogg, avoir des aliments pour le petit déjeuner bons et sains.</li>
+                            <li class="list-group-item"><span class="font-weight-bold">1915</span> - Kellogg lance les Bran Flakes, les premières céréales à haute teneur en fibres. Lancement suivi de près par les céréales Kellogg’s ® All-Bran™ en 1916.</li>
+                            <li class="list-group-item"><span class="font-weight-bold">1922</span> - Les produits Kellogg's arrivent au Royaune-Uni et sont en vente dans les épiceries.</li>
+                            <li class="list-group-item"><span class="font-weight-bold">1923</span> - Kellogg Company innove en devenant la première entreprise de l’industrie agro-alimentaire à embaucher une diététicienne. Mary Barber a lancé l'un des premiers service dédié aux consommateurs et a travaillé sur le rôle de chaque aliment dans un régime alimentaire équilibré.</li>
+                            <li class="list-group-item"><span class="font-weight-bold">1940</span> - Pendant la seconde guerre mondiale. Kellogg a créé des céréales destinées à nourrir au mieux les populations touchées par les conflits. Fabriquées à base de céréales locales la plupart de ces marques ont aujourd'hui disparu.</li>
+                            <li class="list-group-item"><span class="font-weight-bold">Durant les années 1950</span> - Kellogg's lance Special K et Frosties.</li>
+                            <li class="list-group-item"><span class="font-weight-bold">1968</span> - Kellogg's arrive en France.</li>
+                            <li class="list-group-item"><span class="font-weight-bold">1969</span> - Kellogg's a le grand honneur de fournir le petit déjeuner aux légendaires Neil Armstrong, Buzz Aldrin et Michael Collins lors de leur voyage sur la lune avec Apollo 11.</li>
+                            <li class="list-group-item"><span class="font-weight-bold">Durant les années 1980</span> - Kellogg’s agrandit sa gamme de produits pour le bonheur des consommateurs..</li>
+                            <li class="list-group-item"><span class="font-weight-bold">1997</span> - Ouverture du W.K. Kellogg Institute for Food and Nutrition Research – où des scientifiques , des nutritionnistes et des ingénieurs transforment des céréales brutes en céréales pour le petit déjeuner bonnes et saines pour toute la famille.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card mb-3">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Au cours du XXIème siècle
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"><span class="font-weight-bold">2010</span> - Kellogg's réduit de 30 % la quantité de sel des céréales pour le petit déjeuner telles que les Corn Flakes et Rice Krispies.</li>
+                            <li class="list-group-item"><span class="font-weight-bold">2011</span> - Kellogg’s ajoute de la vitamine D à ses céréales pour enfants pour aider à combattre la progression du rachitisme.</li>
+                            <li class="list-group-item"><span class="font-weight-bold">Aujourd'hui</span> - plus de 100 ans après la création de la société, nous suivons fièrement les valeurs de W.K. Kellogg dans 180 pays à travers le monde. Notre mission est encore et toujours de proposer à nos consommmateurs des petits déjeuners bons et sains qui feront de vos matins des matins réussis. Nous fabriquons toujours les pétales de maïs de la même façon que le faisait W.K. KELLOGG Ils sont simplement meilleurs de cette façon</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

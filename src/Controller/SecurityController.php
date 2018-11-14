@@ -1,0 +1,94 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: theosikli
+ * Date: 14/11/2018
+ * Time: 13:23
+ */
+
+namespace App\Controller;
+
+
+use App\Entity\Client;
+use App\Entity\Utilisateur;
+use App\Form\RegisterType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
+class SecurityController extends AbstractController
+{
+    /**
+     * @Route("/login", name="login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'errors' => $error
+        ]);
+    }
+
+    public function manual_login(Request $request)
+    {
+
+    }
+
+    /**
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Route("register",name="register")
+     */
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        // 1) build the form
+        $user = new Utilisateur();
+
+        $form = $this->createForm(RegisterType::class, $user);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // 3) Encode the password (you could also do this via Doctrine listener)
+            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
+
+            // 4) save the User!
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+
+            return $this->redirectToRoute('login');
+        }
+
+        return $this->render(
+            'security/register.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logingOut() {
+        $this->get('security.token_storage')->setToken(null);
+        $this->get('request')->getSession()->invalidate();
+
+        return $this->redirectToRoute('home');
+    }
+}

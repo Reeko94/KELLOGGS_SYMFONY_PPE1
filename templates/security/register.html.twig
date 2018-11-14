@@ -1,0 +1,21 @@
+{% extends('base.html.twig') %}
+{% block title "S'inscrire" %}
+
+{% block body %}
+    <div class="container mt-4">
+
+        {{ form_start(form) }}
+        <h2>S'inscrire</h2>
+        <div class="row">
+            <div class="col-md-6">{{ form_row(form.email) }}</div>
+            <div class="col-md-6">{{ form_row(form.password) }}</div>
+            <div class="col-md-6">{{ form_row(form.nom) }}</div>
+            <div class="col-md-6">{{ form_row(form.prenom) }}</div>
+            <button class="btn-success btn-block">Se connecter</button>
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

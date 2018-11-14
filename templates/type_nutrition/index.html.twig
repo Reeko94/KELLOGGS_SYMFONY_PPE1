@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeNutrition index{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Les types de nutritions</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Libelle</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for type_nutrition in type_nutritions %}
+                <tr>
+                    <td>{{ type_nutrition.libelle }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('type_nutrition_show', {'id': type_nutrition.id}) }}">Afficher</a>
+                        <a class="btn btn-primary" href="{{ path('type_nutrition_edit', {'id': type_nutrition.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun type de nutrition ajoutés en base</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a class="btn btn-success btn-block" href="{{ path('type_nutrition_new') }}">Ajouter un nouveau type</a>
+
+    </div>
+{% endblock %}
