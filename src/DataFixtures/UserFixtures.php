@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Client;
+use App\Entity\Commercial;
 use App\Entity\Utilisateur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -28,6 +30,26 @@ class UserFixtures extends Fixture
             $manager->persist($user);
             $this->addReference($username, $user);
         }
+
+        $client = new Client();
+        $client->setNom('The Great');
+        $client->setPrenom('Brixton');
+        $client->setPassword($this->passwordEncoder->encodePassword($client, 'fedora'));
+        $client->setEmail('brixton@brixton.com');
+        $client->setDateInscription(new \DateTime('now'));
+        $client->setDateNaissance(new \DateTime('2000-11-14'));
+
+        $manager->persist($client);
+
+        $commercial = new Commercial();
+        $commercial->setNom('The Good');
+        $commercial->setPrenom('Brix');
+        $commercial->setPassword($this->passwordEncoder->encodePassword($commercial, 'fedora'));
+        $commercial->setEmail('brixton@brix.com');
+        $commercial->setDateEntree(new \DateTime('now'));
+        $commercial->setPoste('PgM');
+
+        $manager->persist($commercial);
 
         $manager->flush();
     }

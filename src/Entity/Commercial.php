@@ -7,15 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommercialRepository")
  */
-class Commercial
+class Commercial extends Utilisateur
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -25,11 +18,6 @@ class Commercial
      * @ORM\Column(type="date")
      */
     private $date_entree;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getPoste(): ?string
     {
