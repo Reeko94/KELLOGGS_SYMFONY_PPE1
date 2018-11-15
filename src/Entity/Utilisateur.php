@@ -104,7 +104,7 @@ class Utilisateur implements UserInterface,\Serializable
     }
 
     /**
-     * @param string $discr
+     * @return null|string
      */
     public function getDiscr(): ?string
     {
@@ -112,7 +112,8 @@ class Utilisateur implements UserInterface,\Serializable
     }
 
     /**
-     * @return string
+     * @param string $discr
+     * @return Utilisateur
      */
     public function setDiscr(string $discr): self
     {
