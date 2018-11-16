@@ -50,6 +50,12 @@ class Utilisateur implements UserInterface,\Serializable
      */
     private $discr;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $type;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -196,6 +202,18 @@ class Utilisateur implements UserInterface,\Serializable
      */
     public function getRoles()
     {
-        return ["USER"];
+        return ["ROLE"];
+    }
+
+    public function getType(): ?int
+    {
+        return $this->type;
+    }
+
+    public function setType(int $type): self
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }

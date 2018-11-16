@@ -7,7 +7,7 @@
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
     <a class="navbar-brand" href="{{ path('home')  }}">Kellogg's</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -19,6 +19,11 @@
     </ul>
     {% if app.user %}
         <ul class="navbar-nav">
+            {% if not app.user | client %}
+            <li class="nav-item">
+                <a href="" class="nav-link">Espace d'administration</a>
+            </li>
+            {% endif %}
             <li class="nav-item">
                 <a href="{{ path('logout') }}" class="nav-link">Se déconnecter</a>
             </li>

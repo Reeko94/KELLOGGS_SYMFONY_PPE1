@@ -2,6 +2,11 @@
 {% block body %}
     <div class="container">
         <pre>
+            {% if  app.user and (app.user | client) %}
+                HELLO
+            {% else %}
+                HERE
+            {% endif %}
             {{ dump(user) }}
         </pre>
     </div>

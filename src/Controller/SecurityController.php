@@ -9,7 +9,6 @@
 namespace App\Controller;
 
 
-use App\Entity\Client;
 use App\Entity\Utilisateur;
 use App\Form\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,6 +27,7 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -37,11 +37,6 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
             'errors' => $error
         ]);
-    }
-
-    public function manual_login(Request $request)
-    {
-
     }
 
     /**
@@ -64,6 +59,7 @@ class SecurityController extends AbstractController
             // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
+            $user->setType(1);
 
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();

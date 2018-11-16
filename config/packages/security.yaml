@@ -43,6 +43,3 @@ security:
         App\Entity\Utilisateur:
             algorithm: bcrypt
             cost: 12
-
-    role_hierarchy:
-        ROLE_ADMIN: ROLE_USER
