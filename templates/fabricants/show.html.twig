@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fabricants{% endblock %}
+
+{% block body %}
+
+    <div class=container>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><h1>Fabricants</h1></th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fabricant.id }}</td>
+
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ fabricant.libelle }}</td>
+
+            </tr>
+            <tr>
+                <th>Logo</th>
+                <td>{{ fabricant.logo }}</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a class="btn btn-success btn-block" href="{{ path('fabricants_index') }}">Retour à la liste des fabricants</a>
+
+    </div>
+{% endblock %}
