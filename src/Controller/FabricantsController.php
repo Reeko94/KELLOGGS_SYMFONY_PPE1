@@ -31,14 +31,18 @@ class FabricantsController extends AbstractController
 
     /**
      * @Route("/", name="fabricants_index", methods="GET")
+     * @param FabricantsRepository $fabricantsRepository
+     * @return Response
      */
     public function index(FabricantsRepository $fabricantsRepository): Response
     {
-        return $this->render('fabricants/index.html.twig', ['fabricants' => $fabricantsRepository->findAll()]);
+        return $this->render('fabricants/index.html.twig', ['fabricants' => $fabricantsRepository->findAll(),'current_menu' => 'marques']);
     }
 
     /**
      * @Route("/new", name="fabricants_new", methods="GET|POST")
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -81,6 +85,8 @@ class FabricantsController extends AbstractController
 
     /**
      * @Route("/{id}", name="fabricants_show", methods="GET")
+     * @param Fabricants $fabricant
+     * @return Response
      */
     public function show(Fabricants $fabricant): Response
     {
@@ -89,6 +95,9 @@ class FabricantsController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="fabricants_edit", methods="GET|POST")
+     * @param Request $request
+     * @param Fabricants $fabricant
+     * @return Response
      */
     public function edit(Request $request, Fabricants $fabricant): Response
     {
@@ -96,20 +105,20 @@ class FabricantsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $this->fileSystem->remove($this->getParameter('fabricant_directory').'/'.$fabricant->getLogo());
-            /**
-             * @ar Symfony\Component\HttpFoundation\File\UploadedFile $file
-             */
-            $file = $form->get('logo')->getData();
-            $fileName = $this->generateUniqueFilename().'.'.$file->guessExtension();
+            if(!is_null($form->get('logo')->getData())) {
+                $this->fileSystem->remove($this->getParameter('fabricant_directory').'/'.$fabricant->getLogo());
+                $file = $form->get('logo')->getData();
+                $fileName = $this->generateUniqueFilename().'.'.$file->guessExtension();
 
-            try {
-                $file->move($this->getParameter('fabricant_directory'),$fileName);
-            } catch (FileException $e) {
+                try {
+                    $file->move($this->getParameter('fabricant_directory'),$fileName);
+                } catch (FileException $e) {
 
+                }
+                $fabricant->setLogo($fileName);
+            } else {
+                $fabricant->setLogo($fabricant->getLogo());
             }
-
-            $fabricant->setLogo($fileName);
 
             $this->getDoctrine()->getManager()->flush();
 
@@ -126,6 +135,9 @@ class FabricantsController extends AbstractController
 
     /**
      * @Route("/{id}", name="fabricants_delete", methods="DELETE")
+     * @param Request $request
+     * @param Fabricants $fabricant
+     * @return Response
      */
     public function delete(Request $request, Fabricants $fabricant): Response
     {

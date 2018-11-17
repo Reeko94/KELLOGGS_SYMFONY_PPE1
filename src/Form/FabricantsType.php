@@ -22,6 +22,7 @@ class FabricantsType extends AbstractType
             ->add('logo',FileType::class, [
                 'label' => 'Logo de la marque',
                 'mapped' => false,
+                'required' => false
             ])
             ->add('TypeNutrition', EntityType::class, [
                 'class' => TypeNutrition::class,

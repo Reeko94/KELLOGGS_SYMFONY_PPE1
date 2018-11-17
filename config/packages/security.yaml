@@ -8,7 +8,7 @@ security:
         # demo:
         #password: demo
         #role ROLE_ADMIN
-        from_database:
+        app_user_provider:
             entity:
                 class: App\Entity\Utilisateur
                 property: email

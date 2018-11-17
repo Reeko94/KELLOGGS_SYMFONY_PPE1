@@ -3,41 +3,33 @@
 {% block title %}Fabricants index{% endblock %}
 
 {% block body %}
-    <h1>Fabricants index</h1>
-    <div class="container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Libelle</th>
-                <th>Logo</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for fabricant in fabricants %}
-            <tr>
-                <td>{{ fabricant.id }}</td>
-                <td>{{ fabricant.libelle }}</td>
-                <td>{{ fabricant.logo }}</td>
-                <td>
-                    <div class="d-flex align-content-start flex-wrap">
-                        <a class="btn btn-success mr-1"  href="{{ path('fabricants_show', {'id': fabricant.id}) }}">Afficher</a>
-                        <a class="btn btn-primary mr-1" href="{{ path('fabricants_edit', {'id': fabricant.id}) }}">Modifier</a>
-                        {{ include('fabricants/_delete_form.html.twig') }}
+    <h1 class="text-center">Nos marques</h1>
+    <div class="container mt-4 mb-4">
+        <div class="row">
+            {% for f in fabricants %}
+                <div class="col-md-4">
+                    <div class="card mb-3" style="width: 18rem;padding:5px 20px 0 20px;">
+                        {% if f.logo != "" %}
+                        <img class="card-img-top" src="/uploads/fabricant/{{ f.logo }}" height="200" width="100" alt="Card image cap">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ path('fabricants_show', {id: f.id}) }}">{{ f.libelle }}</a></h5>
+                            <p class="card-text">
+                                {% if app.user is not null and app.user.type > 1 %}
+                                <a class="btn btn-success btn-block" href="{{ path('fabricants_edit',{id: f.id}) }}">Modifier</a>
+                                <form method="post" action="{{ path('fabricants_delete', {'id': f.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimer cet item?');">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ f.id) }}">
+                                    <button class="btn btn-danger btn-block">Supprimer</button>
+                                </form>
+                            {% endif %}
+                            </p>
+                        </div>
                     </div>
-
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a class="btn btn-success" href="{{ path('fabricants_new') }}">Ajouter un fabricant</a>
+                </div>
+            {% endfor %}
+        </div>
+    <a class="btn btn-success btn-block btn-lg" href="{{ path('fabricants_new') }}">Ajouter un fabricant</a>
     </div>
 
 {% endblock %}
