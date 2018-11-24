@@ -1,39 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Fabricants{% endblock %}
+{% block title %}Fabricants {% endblock %}
 
 {% block body %}
-
-    <div class=container>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th><h1>Fabricants</h1></th>
-        </tr>
-        </thead>
-
-
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ fabricant.id }}</td>
-
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ fabricant.libelle }}</td>
-
-            </tr>
-            <tr>
-                <th>Logo</th>
-                <td>{{ fabricant.logo }}</td>
-
-            </tr>
-        </tbody>
-    </table>
-
-
-    <a class="btn btn-success btn-block" href="{{ path('fabricants_index') }}">Retour à la liste des fabricants</a>
-
+    <h1 class="text-center">Nos marques</h1>
+    <div class="container mt-4 mb-4">
+        <div class="row">
+            {% for f in articles %}
+                <div class="col-md-4">
+                    <div class="card mb-3" style="width: 18rem;padding:5px 20px 0 20px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ f.libelle }}</h5>
+                            <p class="card-text">
+                                {% if app.user is not null and app.user.type > 1 %}
+                                <a class="btn btn-success btn-block" href="{{ path('articles_edit',{id: f.id}) }}">Modifier</a>
+                            <form method="post" action="{{ path('fabricants_delete', {'id': f.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimer cet item?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ f.id) }}">
+                                <button class="btn btn-danger btn-block">Supprimer</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="btn btn-success btn-block btn-lg" href="{{ path('articles_new') }}">Ajouter un article</a>
     </div>
+
 {% endblock %}

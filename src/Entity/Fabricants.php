@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -33,6 +35,16 @@ class Fabricants implements \ArrayAccess
      * @ORM\JoinColumn(nullable=false)
      */
     private $TypeNutrition;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Articles", mappedBy="fabricant")
+     */
+    private $articles;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -73,11 +85,6 @@ class Fabricants implements \ArrayAccess
         $this->TypeNutrition = $TypeNutrition;
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->TypeNutrition;
     }
 
     /**
@@ -140,5 +147,36 @@ class Fabricants implements \ArrayAccess
     public function offsetUnset($offset)
     {
         // TODO: Implement offsetUnset() method.
+    }
+
+    /**
+     * @return Collection|Articles[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Articles $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setFabricant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Articles $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getFabricant() === $this) {
+                $article->setFabricant(null);
+            }
+        }
+
+        return $this;
     }
 }

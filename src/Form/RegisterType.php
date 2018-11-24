@@ -23,6 +23,7 @@ class RegisterType extends AbstractType
             ))
             ->add('nom')
             ->add('prenom')
+            ->add('date_naissance',DateType::class)
         ;
     }
 

@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Client;
 use App\Entity\Utilisateur;
 use App\Form\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -48,7 +49,7 @@ class SecurityController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         // 1) build the form
-        $user = new Utilisateur();
+        $user = new Client();
 
         $form = $this->createForm(RegisterType::class, $user);
 
@@ -59,6 +60,7 @@ class SecurityController extends AbstractController
             // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
+            $user->setDateInscription(new \DateTime('now'));
             $user->setType(1);
 
             // 4) save the User!

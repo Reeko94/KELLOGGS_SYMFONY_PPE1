@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Articles;
 use App\Entity\Fabricants;
-use App\Form\Fabricants1Type;
-use App\Form\FabricantsEditType;
 use App\Form\FabricantsType;
+use App\Repository\ArticlesRepository;
 use App\Repository\FabricantsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -86,11 +86,14 @@ class FabricantsController extends AbstractController
     /**
      * @Route("/{id}", name="fabricants_show", methods="GET")
      * @param Fabricants $fabricant
+     * @param ArticlesRepository $articles
      * @return Response
      */
-    public function show(Fabricants $fabricant): Response
+    public function show(Fabricants $fabricant,ArticlesRepository $articles): Response
     {
-        return $this->render('fabricants/show.html.twig', ['fabricant' => $fabricant]);
+
+        $articlesByFabricant = $articles->findBy(['fabricant' => $fabricant->getId(),'disponibilite' => 1]);
+        return $this->render('fabricants/show.html.twig', ['fabricant' => $fabricant,'articles' => $articlesByFabricant]);
     }
 
     /**

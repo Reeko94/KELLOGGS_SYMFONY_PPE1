@@ -24,7 +24,7 @@ class Client extends Utilisateur
         return $this->date_inscription;
     }
 
-    public function setDateInscription(\DateTimeInterface $date_inscription): self
+    public function setDateInscription(\DateTime $date_inscription): self
     {
         $this->date_inscription = $date_inscription;
 

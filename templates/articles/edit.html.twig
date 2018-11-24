@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Articles{% endblock %}
+
+{% block body %}
+    <h2 class="text-center">Modifier l'article</h2>
+<div class="container">
+    {{ form_start(form) }}
+    {{ form_row(form.libelle) }}
+    {{ form_row(form.fabricant) }}
+    {{ form_row(form.disponibilite) }}
+    {{ form_row(form.prix) }}
+    <input type="submit" class="btn btn-success mb-3 btn-block">
+    {{ form_end(form) }}
+
+    <div class="row form-group m-0">
+
+        <a class="btn btn-success mr-1" href="{{ path('articles_index') }}">retour à la liste</a>
+
+    </div>
+{% endblock %}
