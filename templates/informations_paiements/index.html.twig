@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InformationsPaiements index{% endblock %}
+
+{% block body %}
+    <h1>InformationsPaiements index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numero</th>
+                <th>Date</th>
+                <th>Cryptogramme</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for informations_paiement in informations_paiements %}
+            <tr>
+                <td>{{ informations_paiement.id }}</td>
+                <td>{{ informations_paiement.numero }}</td>
+                <td>{{ informations_paiement.date ? informations_paiement.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ informations_paiement.cryptogramme }}</td>
+                <td>{{ informations_paiement.nom }}</td>
+                <td>{{ informations_paiement.prenom }}</td>
+                <td>
+                    <a href="{{ path('informations_paiements_show', {'id': informations_paiement.id}) }}">show</a>
+                    <a href="{{ path('informations_paiements_edit', {'id': informations_paiement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('informations_paiements_new') }}">Create new</a>
+{% endblock %}

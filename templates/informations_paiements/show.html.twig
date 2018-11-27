@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InformationsPaiements{% endblock %}
+
+{% block body %}
+    <h1>InformationsPaiements</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ informations_paiement.id }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ informations_paiement.numero }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ informations_paiement.date ? informations_paiement.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Cryptogramme</th>
+                <td>{{ informations_paiement.cryptogramme }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ informations_paiement.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ informations_paiement.prenom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('informations_paiements_index') }}">back to list</a>
+
+    <a href="{{ path('informations_paiements_edit', {'id': informations_paiement.id}) }}">edit</a>
+
+    {{ include('informations_paiements/_delete_form.html.twig') }}
+{% endblock %}

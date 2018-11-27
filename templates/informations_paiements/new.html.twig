@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New InformationsPaiements{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1>Ajouter des informations de paiements</h1>
+        {{ dump() }}
+        {{ include('informations_paiements/_form.html.twig') }}
+
+        <a class="btn btn-primary btn-block" href="{{ path('informations_paiements_index') }}">Revenir à la liste</a>
+    </div>
+{% endblock %}
