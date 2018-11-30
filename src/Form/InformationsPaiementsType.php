@@ -23,7 +23,7 @@ class InformationsPaiementsType extends AbstractType
                 'label'=>'Numero de la carte'
             ])
             ->add('date',DateType::class,[
-                'widget' => 'single_text',
+                'widget' => 'choice',
                 'format' => 'yyyy-MM-dd',
                 'label'=> "date d'expiration de la carte"
             ])

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Repository\ComposeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +17,7 @@ class HomeController extends AbstractController
      * @return Response
      * @Route("/",name="home")
      */
-    public function index() : Response
+    public function index(ComposeRepository $c) : Response
     {
         return $this->render("pages/home.html.twig");
     }

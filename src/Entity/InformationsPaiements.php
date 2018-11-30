@@ -42,7 +42,7 @@ class InformationsPaiements
     private $prenom;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", inversedBy="informationsPaiements", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="informationsPaiements")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Utilisateur;

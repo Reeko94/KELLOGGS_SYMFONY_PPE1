@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @Route("/informations/paiements")
+ * @Route("/informationspaiements")
  */
 class InformationsPaiementsController extends AbstractController
 {
@@ -42,6 +42,8 @@ class InformationsPaiementsController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+                $utilisateur = $this->getUser();
+                $informationsPaiement->setUtilisateur($utilisateur);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($informationsPaiement);
                 $em->flush();
@@ -95,13 +97,6 @@ class InformationsPaiementsController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('informations_paiements_index');
-    }
-
-    public function  ajouterAction()
-    {
-        $Utilisateur = new Utilisateur();
-        $Utilisateur->setInformationsPaiements($this->getUser());
-        $form = $this->createForm(new InformationsPaiementsType(), $Utilisateur);
+        return $this->redirectToRoute('home');
     }
 }
