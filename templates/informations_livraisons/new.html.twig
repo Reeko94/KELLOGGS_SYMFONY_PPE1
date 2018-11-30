@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New InformationsLivraisons{% endblock %}
+
+{% block body %}
+    <h1>Create new InformationsLivraisons</h1>
+
+    {{ include('informations_livraisons/_form.html.twig') }}
+
+    <a href="{{ path('informations_livraisons_index') }}">back to list</a>
+{% endblock %}

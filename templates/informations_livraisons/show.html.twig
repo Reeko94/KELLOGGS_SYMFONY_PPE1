@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InformationsLivraisons{% endblock %}
+
+{% block body %}
+    <h1>InformationsLivraisons</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ informations_livraison.id }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ informations_livraison.numero }}</td>
+            </tr>
+            <tr>
+                <th>Complement</th>
+                <td>{{ informations_livraison.complement }}</td>
+            </tr>
+            <tr>
+                <th>Rue</th>
+                <td>{{ informations_livraison.rue }}</td>
+            </tr>
+            <tr>
+                <th>Codepostal</th>
+                <td>{{ informations_livraison.codepostal }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ informations_livraison.ville }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ informations_livraison.pays }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('informations_livraisons_index') }}">back to list</a>
+
+    <a href="{{ path('informations_livraisons_edit', {'id': informations_livraison.id}) }}">edit</a>
+
+    {{ include('informations_livraisons/_delete_form.html.twig') }}
+{% endblock %}

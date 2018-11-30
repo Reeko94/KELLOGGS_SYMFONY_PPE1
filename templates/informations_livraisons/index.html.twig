@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InformationsLivraisons index{% endblock %}
+
+{% block body %}
+    <h1>InformationsLivraisons index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numero</th>
+                <th>Complement</th>
+                <th>Rue</th>
+                <th>Codepostal</th>
+                <th>Ville</th>
+                <th>Pays</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for informations_livraison in informations_livraisons %}
+            <tr>
+                <td>{{ informations_livraison.id }}</td>
+                <td>{{ informations_livraison.numero }}</td>
+                <td>{{ informations_livraison.complement }}</td>
+                <td>{{ informations_livraison.rue }}</td>
+                <td>{{ informations_livraison.codepostal }}</td>
+                <td>{{ informations_livraison.ville }}</td>
+                <td>{{ informations_livraison.pays }}</td>
+                <td>
+                    <a href="{{ path('informations_livraisons_show', {'id': informations_livraison.id}) }}">show</a>
+                    <a href="{{ path('informations_livraisons_edit', {'id': informations_livraison.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('informations_livraisons_new') }}">Create new</a>
+{% endblock %}

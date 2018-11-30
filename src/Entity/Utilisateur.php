@@ -55,6 +55,16 @@ class Utilisateur implements UserInterface,\Serializable
      */
     private $type;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\InformationsLivraisons", mappedBy="utilisateur", orphanRemoval=true)
+     */
+    private $informationsLivraisons;
+
+    public function __construct()
+    {
+        $this->informationsLivraisons = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -213,6 +223,37 @@ class Utilisateur implements UserInterface,\Serializable
     public function setType(int $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|InformationsLivraisons[]
+     */
+    public function getInformationsLivraisons(): Collection
+    {
+        return $this->informationsLivraisons;
+    }
+
+    public function addInformationsLivraison(InformationsLivraisons $informationsLivraison): self
+    {
+        if (!$this->informationsLivraisons->contains($informationsLivraison)) {
+            $this->informationsLivraisons[] = $informationsLivraison;
+            $informationsLivraison->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInformationsLivraison(InformationsLivraisons $informationsLivraison): self
+    {
+        if ($this->informationsLivraisons->contains($informationsLivraison)) {
+            $this->informationsLivraisons->removeElement($informationsLivraison);
+            // set the owning side to null (unless already changed)
+            if ($informationsLivraison->getUtilisateur() === $this) {
+                $informationsLivraison->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }
