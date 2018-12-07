@@ -62,36 +62,5 @@ class Client extends Utilisateur
         return $this;
     }
 
-    /**
-     * @return Collection|Factures[]
-     */
-    public function getFactures(): Collection
-    {
-        return $this->factures;
-    }
-
-    public function addFacture(Factures $facture): self
-    {
-        if (!$this->factures->contains($facture)) {
-            $this->factures[] = $facture;
-            $facture->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFacture(Factures $facture): self
-    {
-        if ($this->factures->contains($facture)) {
-            $this->factures->removeElement($facture);
-            // set the owning side to null (unless already changed)
-            if ($facture->getClient() === $this) {
-                $facture->setClient(null);
-            }
-        }
-
-        return $this;
-    }
-
 
 }

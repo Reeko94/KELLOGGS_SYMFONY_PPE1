@@ -37,11 +37,6 @@ class Articles
      */
     private $fabricant;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Factures", inversedBy="articles")
-     */
-    private $factures;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -91,18 +86,6 @@ class Articles
     public function setFabricant(?Fabricants $fabricant): self
     {
         $this->fabricant = $fabricant;
-
-        return $this;
-    }
-
-    public function getFactures(): ?Factures
-    {
-        return $this->factures;
-    }
-
-    public function setFactures(?Factures $factures): self
-    {
-        $this->factures = $factures;
 
         return $this;
     }

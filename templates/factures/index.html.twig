@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Facture  !{% endblock %}
+
+{% block body %}
+    <div class="container mt-3 mb-3">
+        <div class="card">
+            <div class="card-header">
+                Facture du
+                <strong>{{ facture.date | date('d/m/Y') }}</strong>
+                <span class="float-right"> <strong>Statut:</strong> Payé</span>
+
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h6 class="mb-3">De:</h6>
+                        <div>
+                            <strong>Kellogg's</strong>
+                        </div>
+
+                        <div>1 Rue Galilée,<br> 93160 Noisy-le-Grand<br>France</div>
+                        <div>Email: <a href="mailto:kelloggs@gmail.com">kelloggs@gmail.com</a></div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <h6 class="mb-3">Vers :</h6>
+                        <div>
+                            <strong>{{ infosLivraison.utilisateur.nom }}  {{ infosLivraison.utilisateur.prenom }}</strong>
+                        </div>
+                        <div>{{ infosLivraison.numero }} {{ infosLivraison.complement }} {{ infosLivraison.rue }}<br> {{ infosLivraison.codePostal }} {{ infosLivraison.ville }},<br> {{ infosLivraison.pays }}</div>
+                        <div>Email: {{ infosLivraison.utilisateur.email }}</div>
+                    </div>
+
+
+
+                </div>
+                <div class="table-responsive-sm">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Article</th>
+                            <th class="right">Prix unitaire</th>
+                            <th class="center">Quantite</th>
+                            <th class="right">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% set prixttc = 0 %}
+                        {% for article,qte in articles %}
+                            {% set prixtotal = prix[article] * qte %}
+                            {% set prixttc = prixttc + prixtotal %}
+                        <tr>
+                            <td class="left strong">{{ article }}</td>
+                            <td class="right">{{ prix[article] }} €</td>
+                            <td class="center">{{ qte }}</td>
+                            <td class="right">{{ prixtotal }} €</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-5">
+
+                    </div>
+
+                    <div class="col-lg-6 col-sm-5 ml-auto">
+                        <table class="table table-clear">
+                            <tbody>
+                            <tr>
+                                <td class="left">
+                                    <strong>Prix HT</strong>
+                                </td>
+                                <td class="right"> {{ prixttc - (prixttc*0.2) | round(2,'floor') }} €</td>
+                            </tr>
+                            <tr>
+                                <td class="left">
+                                    <strong>TVA</strong>
+                                </td>
+                                <td class="right">{{ prixttc * 0.2  | round(2,'floor') }} €</td>
+                            </tr>
+                            <tr>
+                                <td class="left">
+                                    <strong>Prix TTC</strong>
+                                </td>
+                                <td class="right">
+                                    <strong>{{ prixttc | round(2,'floor') }} €</strong>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -35,6 +35,14 @@ class Compose
     }
 
     /**
+     * @return mixed
+     */
+    public function getIdArticle()
+    {
+        return $this->id_article;
+    }
+
+    /**
      * @param mixed $quantite
      */
     public function setQuantite($quantite)
