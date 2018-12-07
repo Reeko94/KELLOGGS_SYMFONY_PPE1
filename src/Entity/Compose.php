@@ -15,14 +15,14 @@ class Compose
     private $quantite;
 
     /**
-     * @ORM\Column(type="integer")
      * @ORM\Id()
+     * @ORM\Column(type="integer")
      */
     private $id_facture;
 
     /**
-     * @ORM\Column(type="integer")
      * @ORM\Id()
+     * @ORM\Column(type="integer")
      */
     private $id_article;
 

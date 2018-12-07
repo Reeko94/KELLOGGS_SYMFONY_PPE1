@@ -8,20 +8,24 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Image</th>
                 <th>Id</th>
                 <th>Libelle</th>
                 <th>Disponibilite</th>
                 <th>Prix</th>
+                <th>Calories</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for article in articles %}
             <tr>
+                <td><img class="card-img-top" height="200" width="100" alt="Card image cap" src="/uploads/article/{{ article.urlMedia }}"></td>
                 <td>{{ article.id }}</td>
                 <td>{{ article.libelle }}</td>
                 <td>{{ article.disponibilite ? 'Yes' : 'No' }}</td>
                 <td>{{ article.prix }}</td>
+                <td>{{ article.calories }}</td>
                 <td>
                     <a href="{{ path('articles_show', {'id': article.id}) }}">show</a>
                     <a href="{{ path('articles_edit', {'id': article.id}) }}">edit</a>

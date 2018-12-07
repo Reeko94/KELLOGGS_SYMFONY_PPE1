@@ -1,4 +1,49 @@
 {
+    "aimeos/ai-admin-jqadm": {
+        "version": "2018.10.7"
+    },
+    "aimeos/ai-admin-jsonadm": {
+        "version": "2018.10.2"
+    },
+    "aimeos/ai-client-html": {
+        "version": "2018.10.10"
+    },
+    "aimeos/ai-client-jsonapi": {
+        "version": "2018.10.3"
+    },
+    "aimeos/ai-controller-frontend": {
+        "version": "2018.10.2"
+    },
+    "aimeos/ai-controller-jobs": {
+        "version": "2018.10.3"
+    },
+    "aimeos/ai-fosuser": {
+        "version": "2018.10.1"
+    },
+    "aimeos/ai-gettext": {
+        "version": "2018.10.1"
+    },
+    "aimeos/ai-monolog": {
+        "version": "2018.10.1"
+    },
+    "aimeos/ai-swiftmailer": {
+        "version": "2018.10.1"
+    },
+    "aimeos/ai-symfony": {
+        "version": "2018.10.2"
+    },
+    "aimeos/ai-twig": {
+        "version": "2018.10.1"
+    },
+    "aimeos/aimeos-core": {
+        "version": "2018.10.10"
+    },
+    "aimeos/aimeos-symfony": {
+        "version": "2018.10.1"
+    },
+    "composer/installers": {
+        "version": "v1.6.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -95,6 +140,9 @@
     "fig/link-util": {
         "version": "1.0.0"
     },
+    "friendsofsymfony/user-bundle": {
+        "version": "v2.1.2"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -121,6 +169,9 @@
     },
     "psr/container": {
         "version": "1.0.0"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
     },
     "psr/link": {
         "version": "1.0.0"
@@ -299,6 +350,9 @@
     "symfony/property-info": {
         "version": "v4.1.7"
     },
+    "symfony/psr-http-message-bridge": {
+        "version": "v1.1.0"
+    },
     "symfony/routing": {
         "version": "4.0",
         "recipe": {
@@ -337,6 +391,9 @@
             "version": "2.5",
             "ref": "3db029c03e452b4a23f7fc45cec7c922c2247eb8"
         }
+    },
+    "symfony/templating": {
+        "version": "v4.1.9"
     },
     "symfony/test-pack": {
         "version": "v1.0.4"
@@ -406,6 +463,9 @@
     },
     "zendframework/zend-code": {
         "version": "3.3.1"
+    },
+    "zendframework/zend-diactoros": {
+        "version": "1.8.6"
     },
     "zendframework/zend-eventmanager": {
         "version": "3.2.1"

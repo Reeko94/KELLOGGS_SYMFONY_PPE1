@@ -6,6 +6,8 @@ use App\Entity\Articles;
 use App\Form\ArticlesType;
 use App\Repository\ArticlesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,11 +18,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticlesController extends AbstractController
 {
     /**
+     * @var Filesystem
+     */
+    private $fileSystem;
+
+    /**
      * @Route("/", name="articles_index", methods="GET")
      */
     public function index(ArticlesRepository $articlesRepository): Response
     {
         return $this->render('articles/index.html.twig', ['articles' => $articlesRepository->findAll()]);
+    }
+
+    private function generateUniqueFilename()
+    {
+        return md5(uniqid());
     }
 
     /**
@@ -33,6 +45,17 @@ class ArticlesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('urlMedia')->getData();
+            $fileName = $this->generateUniqueFilename().'.'.$file->guessExtension();
+
+            try {
+                $file->move($this->getParameter('article_directory'),$fileName);
+            } catch (FileException $e) {
+
+            }
+
+            $article->setUrlMedia($fileName);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
@@ -66,6 +89,22 @@ class ArticlesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if(!is_null($form->get('urlMedia')->getData())) {
+                $this->fileSystem->remove($this->getParameter('article_directory').'/'.$article->getUrlMedia());
+                $file = $form->get('urlMedia')->getData();
+                $fileName = $this->generateUniqueFilename().'.'.$file->guessExtension();
+
+                try {
+                    $file->move($this->getParameter('article_directory'),$fileName);
+                } catch (FileException $e) {
+
+                }
+                $article->setUrlMedia($fileName);
+            } else {
+                $article->setUrlMedia($article->getUrlMedia());
+            }
+
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('articles_index', ['id' => $article->getId()]);

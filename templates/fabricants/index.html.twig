@@ -28,7 +28,9 @@
                 </div>
             {% endfor %}
         </div>
-    <a class="btn btn-success btn-block btn-lg" href="{{ path('fabricants_new') }}">Ajouter un fabricant</a>
+    {% if app.user is not null and app.user.type > 1 %}
+        <a class="btn btn-success btn-block btn-lg" href="{{ path('fabricants_new') }}">Ajouter un fabricant</a>
+        {% endif %}
     </div>
 
 {% endblock %}

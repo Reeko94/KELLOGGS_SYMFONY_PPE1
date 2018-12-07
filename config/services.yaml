@@ -6,6 +6,7 @@
 parameters:
     locale: 'fr'
     fabricant_directory: '%kernel.project_dir%/public/uploads/fabricant'
+    article_directory: '%kernel.project_dir%/public/uploads/article'
 
 services:
     # default configuration for services in *this* file

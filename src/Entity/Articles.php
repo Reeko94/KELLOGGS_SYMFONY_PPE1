@@ -37,6 +37,16 @@ class Articles
      */
     private $fabricant;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $calories;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $urlMedia;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,4 +99,29 @@ class Articles
 
         return $this;
     }
+
+    public function getCalories(): ?float
+    {
+        return $this->calories;
+    }
+
+    public function setCalories(float $calories): self
+    {
+        $this->calories = $calories;
+
+        return $this;
+    }
+
+    public function getUrlMedia(): ?string
+    {
+        return $this->urlMedia;
+    }
+
+    public function setUrlMedia(string $urlMedia): self
+    {
+        $this->urlMedia = $urlMedia;
+
+        return $this;
+    }
+
 }
