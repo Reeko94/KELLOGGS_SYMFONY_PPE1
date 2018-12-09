@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Medias{% endblock %}
+
+{% block body %}
+    <h1>Create new Medias</h1>
+
+    {{ include('medias/_form.html.twig') }}
+
+    <a href="{{ path('medias_index') }}">back to list</a>
+{% endblock %}
