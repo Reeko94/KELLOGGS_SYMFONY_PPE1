@@ -22,7 +22,7 @@
             <a class="nav-link {% if current_menu is defined and  current_menu == 'marques' %} active {% endif %}" href="{{ path('fabricants_index') }}">Nos marques</a>
         </li>
         <li class="nav-item">
-            <a href="" class="nav-link {% if current_menu is defined and  current_menu == 'nouveautes' %} active {% endif %}">Nouveautes</a>
+            <a href="{{ path('nouveautes') }}" class="nav-link {% if current_menu is defined and  current_menu == 'nouveautes' %} active {% endif %}">Nouveautes</a>
         </li>
     </ul>
     <ul class="navbar-nav">

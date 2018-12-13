@@ -18,4 +18,9 @@ class ArticlesRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Articles::class);
     }
+
+    public function getlastfive()
+    {
+        return $this->findBy([],["id" => "DESC"],5);
+    }
 }

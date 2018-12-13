@@ -54,8 +54,7 @@ class PanierRepository extends ServiceEntityRepository
      */
     public function checkPanier($user)
     {
-        $qb = $this->createQueryBuilder('p');
-        return $qb->select()
+        return $this->createQueryBuilder('p')->select()
             ->where('p.utilisateur = :user')
             ->setParameter('user',$user)
             ->getQuery()->getResult();
@@ -137,7 +136,7 @@ class PanierRepository extends ServiceEntityRepository
             ->update(Panier::class,'p')
             ->set('p.articles',':article')
             ->where('p.utilisateur = :user')
-            ->setParameter('article','[]')
+            ->setParameter('article','[ ]')
             ->setParameter('user',$idUser)
             ->getQuery()->getResult();
     }
