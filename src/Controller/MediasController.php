@@ -15,16 +15,31 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class MediasController extends AbstractController
 {
+
+    use \App\Traits\GetNBArticlesTrait;
+
+    /**
+     * @var MediasRepository
+     */
+    private $mediasRepository;
+
+    public function __construct(MediasRepository $mediasRepository)
+    {
+        $this->mediasRepository = $mediasRepository;
+    }
+
     /**
      * @Route("/", name="medias_index", methods="GET")
      */
-    public function index(MediasRepository $mediasRepository): Response
+    public function index(): Response
     {
-        return $this->render('medias/index.html.twig', ['medias' => $mediasRepository->findAll()]);
+        return $this->render('medias/index.html.twig', ['medias' => $this->mediasRepository->findAll()]);
     }
 
     /**
      * @Route("/new", name="medias_new", methods="GET|POST")
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -43,12 +58,14 @@ class MediasController extends AbstractController
         return $this->render('medias/new.html.twig', [
             'media' => $media,
             'form' => $form->createView(),
-            'nbCart' => UtilsController::getNbArticleInCart()
+            'nb' => $this->getNBArticle()
         ]);
     }
 
     /**
      * @Route("/{id}", name="medias_show", methods="GET")
+     * @param Medias $media
+     * @return Response
      */
     public function show(Medias $media): Response
     {
@@ -57,6 +74,9 @@ class MediasController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="medias_edit", methods="GET|POST")
+     * @param Request $request
+     * @param Medias $media
+     * @return Response
      */
     public function edit(Request $request, Medias $media): Response
     {
@@ -77,6 +97,9 @@ class MediasController extends AbstractController
 
     /**
      * @Route("/{id}", name="medias_delete", methods="DELETE")
+     * @param Request $request
+     * @param Medias $media
+     * @return Response
      */
     public function delete(Request $request, Medias $media): Response
     {

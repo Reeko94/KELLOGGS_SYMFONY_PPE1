@@ -10,8 +10,10 @@ namespace App\Controller;
 
 
 use App\Entity\Client;
+use App\Entity\Panier;
 use App\Entity\Utilisateur;
 use App\Form\RegisterType;
+use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +23,17 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+
+    /**
+     * @var UtilisateurRepository
+     */
+    private $utilisateurRepository;
+
+    public function __construct(UtilisateurRepository $utilisateurRepository)
+    {
+        $this->utilisateurRepository = $utilisateurRepository;
+    }
+
     /**
      * @Route("/login", name="login")
      * @param AuthenticationUtils $authenticationUtils
@@ -66,6 +79,14 @@ class SecurityController extends AbstractController
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
+            $entityManager->flush();
+
+            $lastUser =  $this->utilisateurRepository->findOneBy([],['id' => 'DESC']);
+            $panier = new Panier();
+            $panier->setUtilisateur($lastUser);
+            $panier->setArticles("[]");
+
+            $entityManager->persist($panier);
             $entityManager->flush();
 
             // ... do any other work - like sending them an email, etc

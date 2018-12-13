@@ -9,6 +9,7 @@ use App\Repository\FacturesRepository;
 use App\Repository\InformationsLivraisonsRepository;
 use App\Repository\InformationsPaiementsRepository;
 use App\Repository\PanierRepository;
+use App\Repository\UtilisateurRepository;
 use JMS\Serializer\SerializerBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -40,14 +41,20 @@ class PanierController extends AbstractController
      */
     private $infosPaiementsRepository;
 
+    /**
+     * @var UtilisateurRepository
+     */
+    private $utilisateurRepository;
+
 
     /**
      * @var FacturesRepository
      */
     private $factureRepository;
 
-    public function __construct(PanierRepository $panierRepository,ArticlesRepository $articleRepository,InformationsLivraisonsRepository $informationsLivraisonsRepository,InformationsPaiementsRepository $informationsPaiementsRepository,FacturesRepository $factureRepository)
+    public function __construct(UtilisateurRepository $utilisateurRepository,PanierRepository $panierRepository,ArticlesRepository $articleRepository,InformationsLivraisonsRepository $informationsLivraisonsRepository,InformationsPaiementsRepository $informationsPaiementsRepository,FacturesRepository $factureRepository)
     {
+        $this->utilisateurRepository = $utilisateurRepository;
         $this->articleRepository = $articleRepository;
         $this->panierRepository = $panierRepository;
         $this->infosLivraisonsRepository = $informationsLivraisonsRepository;
@@ -60,7 +67,6 @@ class PanierController extends AbstractController
      */
     public function index()
     {
-
         if(!$this->getUser())
             return $this->redirectToRoute('home');
 

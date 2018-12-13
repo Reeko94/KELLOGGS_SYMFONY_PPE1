@@ -31,7 +31,6 @@ trait GetNBArticlesTrait
     public function getNBArticle()
     {
         if($user = $this->getUser()){
-            //user = $this->getUser();
             $panier = $this->panierRepository->checkPanier($user);
             return count(json_decode($panier[0]->getArticles()));
         }else {
