@@ -65,7 +65,6 @@ class Utilisateur implements UserInterface,\Serializable
         $this->informationsLivraisons = new ArrayCollection();
     }
 
-
     public function getId(): ?int
     {
         return $this->id;

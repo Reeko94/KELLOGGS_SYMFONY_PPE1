@@ -22,10 +22,11 @@ class Panier
     private $articles;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", inversedBy="panier", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $utilisateur;
+
 
     public function getId(): ?int
     {
@@ -55,4 +56,5 @@ class Panier
 
         return $this;
     }
+
 }

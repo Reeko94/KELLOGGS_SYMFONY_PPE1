@@ -108,18 +108,24 @@
 
             <form action="" method="POST">
                 <div class="form-group">
-
                     <label for="infosL">Merci de choisir vos informations de livraisons</label>
+                    {% if infosLivraison is not empty %}
                     <select class="form-control" name="infosL" id="infosL">
                         <option value="{{ infosLivraison.0.id }}">{{ infosLivraison.0.numero }} {{ infosLivraison.0.complement }} {{ infosLivraison.0.rue }}, {{ infosLivraison.0.codepostal }} {{ infosLivraison.0.ville | upper }} </option>
                     </select>
+                        {% else %}
+                            TODO LINK TO PROFILE PAGE FOR ADD INFO
+                    {% endif %}
                 </div>
                 <div class="form-group">
-
                     <label for="infosP">Merci de choisir vos informations de paiements</label>
+                    {% if infosPaiement is not empty %}
                     <select name="infos_" id="infosP" class="form-control">
                         <option value="{{ infosPaiement.0.id }}">{{ infosPaiement.0.nom }} {{ infosPaiement.0.prenom }} -- {{ infosPaiement.0.numero }}</option>
                     </select>
+                    {% else %}
+                    TODO LINK TO PROFILE PAGE FOR ADD INFO
+                    {% endif %}
                 </div>
                 <div class="form-group">
                     <a href="{{ path('panier_to_facture') }}" class="btn btn-success btn-lg btn-block">Payer</a>

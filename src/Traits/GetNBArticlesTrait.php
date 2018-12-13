@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Entity\Articles;
+use App\Entity\Panier;
 use App\Repository\PanierRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -29,10 +30,9 @@ trait GetNBArticlesTrait
 
     public function getNBArticle()
     {
-        if($this->getUser()){
-
-            $user = $this->getUser();
-            $panier = $this->panierRepository->findBy(['utilisateur'=>$user]);
+        if($user = $this->getUser()){
+            //user = $this->getUser();
+            $panier = $this->panierRepository->checkPanier($user);
             return count(json_decode($panier[0]->getArticles()));
         }else {
             return 0;
