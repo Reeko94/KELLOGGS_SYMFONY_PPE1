@@ -47,4 +47,17 @@ class InformationsPaiementsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @param $user
+     * @return mixed
+     */
+    public function getInfosByUser($user)
+    {
+        return $this->createQueryBuilder('i')
+            ->select('i.id,i.numero,i.date,i.cryptogramme,i.nom,i.prenom')
+            ->where('i.Utilisateur = :user')
+            ->setParameter('user',$user)
+            ->getQuery()->getResult();
+    }
 }

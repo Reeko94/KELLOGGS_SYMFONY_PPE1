@@ -7,6 +7,7 @@ use App\Entity\Fabricants;
 use App\Form\FabricantsType;
 use App\Repository\ArticlesRepository;
 use App\Repository\FabricantsRepository;
+use App\Repository\PanierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -19,15 +20,17 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class FabricantsController extends AbstractController
 {
+    use \App\Traits\GetNBArticlesTrait;
+
     /**
      * @var Filesystem
      */
     private $fileSystem;
 
-    public function __construct()
-    {
-        $this->fileSystem = new Filesystem();
-    }
+    /**
+     * @var PanierRepository
+     */
+    private $panierRepository;
 
     /**
      * @Route("/", name="fabricants_index", methods="GET")
@@ -36,7 +39,11 @@ class FabricantsController extends AbstractController
      */
     public function index(FabricantsRepository $fabricantsRepository): Response
     {
-        return $this->render('fabricants/index.html.twig', ['fabricants' => $fabricantsRepository->findAll(),'current_menu' => 'marques']);
+        return $this->render('fabricants/index.html.twig', [
+            'fabricants' => $fabricantsRepository->findAll(),
+            'current_menu' => 'marques',
+            'nb' => $this->getNBArticle()
+        ]);
     }
 
     /**
@@ -75,6 +82,7 @@ class FabricantsController extends AbstractController
         return $this->render('fabricants/new.html.twig', [
             'fabricant' => $fabricant,
             'form' => $form->createView(),
+            'nb' => $this->getNBArticle()
         ]);
     }
 
@@ -93,7 +101,11 @@ class FabricantsController extends AbstractController
     {
 
         $articlesByFabricant = $articles->findBy(['fabricant' => $fabricant->getId(),'disponibilite' => 1]);
-        return $this->render('fabricants/show.html.twig', ['fabricant' => $fabricant,'articles' => $articlesByFabricant]);
+        return $this->render('fabricants/show.html.twig', [
+            'fabricant' => $fabricant,
+            'articles' => $articlesByFabricant,
+            'nb' => $this->getNBArticle()
+        ]);
     }
 
     /**
@@ -133,6 +145,7 @@ class FabricantsController extends AbstractController
         return $this->render('fabricants/edit.html.twig', [
             'fabricant' => $fabricant,
             'form' => $form->createView(),
+            'nb' => $this->getNBArticle()
         ]);
     }
 
@@ -152,5 +165,20 @@ class FabricantsController extends AbstractController
         }
 
         return $this->redirectToRoute('fabricants_index');
+    }
+
+
+    /**
+     * @Route("/add",name="addpanier",methods="POST")
+     */
+    public function addpanier(Request $request) : Response
+    {
+        if($user = $this->getUser())
+        {
+            $referer = substr($referer = $request->headers->get('referer'),-1);
+            $this->panierRepository->addArticlePanier($user,intval($request->get('id')));
+            $this->addFlash('success','Article ajouté au panier avec succès');
+            return $this->redirectToRoute('fabricants_show',['id' => $referer]);
+        }
     }
 }

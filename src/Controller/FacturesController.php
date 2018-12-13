@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FacturesController extends AbstractController
 {
+    use \App\Traits\GetNBArticlesTrait;
+
     /**
      * @Route("/factures/{id}", name="factures")
      */
@@ -38,7 +40,8 @@ class FacturesController extends AbstractController
             'facture' => $factureUser,
             'infosLivraison' => $infosLivraison,
             'articles' => $articlesFacture,
-            'prix' => $prixArticle
+            'prix' => $prixArticle,
+            'nb' => $this->getNBArticle()
         ]);
     }
 

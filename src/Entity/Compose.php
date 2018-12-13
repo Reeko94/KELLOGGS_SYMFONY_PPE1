@@ -21,6 +21,22 @@ class Compose
     private $id_facture;
 
     /**
+     * @param mixed $id_facture
+     */
+    public function setIdFacture($id_facture): void
+    {
+        $this->id_facture = $id_facture;
+    }
+
+    /**
+     * @param mixed $id_article
+     */
+    public function setIdArticle($id_article): void
+    {
+        $this->id_article = $id_article;
+    }
+
+    /**
      * @ORM\Id()
      * @ORM\Column(type="integer")
      */

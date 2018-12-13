@@ -47,4 +47,13 @@ class InformationsLivraisonsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getInfosByUser($user)
+    {
+        return $this->createQueryBuilder('i')
+            ->select('i.id,i.numero,i.complement,i.rue,i.codepostal,i.ville,i.pays')
+            ->where('i.utilisateur = :user')
+            ->setParameter('user',$user)
+            ->getQuery()->getResult();
+    }
 }

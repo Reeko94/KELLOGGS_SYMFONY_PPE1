@@ -17,18 +17,11 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ArticlesController extends AbstractController
 {
+    use \App\Traits\GetNBArticlesTrait;
     /**
      * @var Filesystem
      */
     private $fileSystem;
-
-    /**
-     * @Route("/", name="articles_index", methods="GET")
-     */
-    public function index(ArticlesRepository $articlesRepository): Response
-    {
-        return $this->render('articles/index.html.twig', ['articles' => $articlesRepository->findAll()]);
-    }
 
     private function generateUniqueFilename()
     {
@@ -38,6 +31,7 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/new", name="articles_new", methods="GET|POST")
      */
+    /*
     public function new(Request $request): Response
     {
         $article = new Articles();
@@ -67,15 +61,7 @@ class ArticlesController extends AbstractController
             'article' => $article,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="articles_show", methods="GET")
-     */
-    public function show(Articles $article): Response
-    {
-        return $this->render('articles/show.html.twig', ['article' => $article]);
-    }
+    }*/
 
     /**
      * @Route("/{id}/edit", name="articles_edit", methods="GET|POST")
@@ -83,6 +69,7 @@ class ArticlesController extends AbstractController
      * @param Articles $article
      * @return Response
      */
+    /**
     public function edit(Request $request, Articles $article): Response
     {
         $form = $this->createForm(ArticlesType::class, $article);
@@ -107,14 +94,15 @@ class ArticlesController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('articles_index', ['id' => $article->getId()]);
+            return $this->redirectToRoute('home', ['id' => $article->getId()]);
         }
 
         return $this->render('articles/edit.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
+            'nb' => $this->getNBArticle()
         ]);
-    }
+    }**/
 
     /**
      * @Route("/{id}", name="articles_delete", methods="DELETE")

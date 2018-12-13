@@ -20,6 +20,11 @@
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ f.id) }}">
                                 <button class="btn btn-danger btn-block">Supprimer</button>
                             </form>
+                            {% elseif app.user is not null %}
+                                <form method="post" action="{{ path('addpanier') }}">
+                                    <input type="hidden" name="id" value="{{ f.id }}">
+                                    <input type="submit" class="btn btn-success" name="add" value="Ajouter au panier">
+                                </form>
                             {% endif %}
                         </div>
                     </div>
