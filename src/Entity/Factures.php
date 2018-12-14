@@ -34,6 +34,11 @@ class Factures
      */
     private $articles;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $totalttc;
+
 
     public function __construct()
     {
@@ -66,6 +71,18 @@ class Factures
     public function setClient(?Client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getTotalttc(): ?float
+    {
+        return $this->totalttc;
+    }
+
+    public function setTotalttc(float $totalttc): self
+    {
+        $this->totalttc = $totalttc;
 
         return $this;
     }

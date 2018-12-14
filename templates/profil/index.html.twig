@@ -1,0 +1,381 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+    <div class="py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="">Bonjour {{ user.prenom | capitalize }} {{ user.nom | upper }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-monospace">Inscrit depuis le {{ user.getdateinscription | date('d/m/Y') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-body">
+                        <div class="card-header"> Mes informations personnelles</div>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">Nom</th>
+                                <td>{{ user.nom | upper}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Prénom</th>
+                                <td>{{ user.prenom }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Adresse e-mail</th>
+                                <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Date de naissance</th>
+                                <td>{{ user.getdatenaissance | date('d m Y') }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <a class="btn btn-lg btn-block btn-warning" id="editpersonnalinfos" data-toggle="modal" data-target="#modalpersonnalInfo">Modifier ces informations</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="">
+                    <div class="card-body">
+                        <div class="card-header"> Mes informations de paiement</div>
+                        {% if paiement is not empty %}
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">Numéro de carte</th>
+                                <td>{{ paiement.0.numero }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nom</th>
+                                <td>{{ paiement.0.nom }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Prénom</th>
+                                <td>{{ paiement.0.prenom }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Date de validité</th>
+                                <td>{{ paiement.0.date | date('m/Y') }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Cryptogramme</th>
+                                <td>{{ paiement.0.cryptogramme }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        {% else %}
+                            <p class="font-weight-bold text-danger">Aucune information de paiement</p>
+                        {% endif %}
+                        {% if paiement is not empty %}
+                            <a class="btn btn-lg btn-block btn-warning" id="editpaiementinfos" data-toggle="modal" data-target="#modalpaiementsinfos">Modifier ces informations</a>
+                            <a class="btn btn-lg btn-block btn-danger" href="{{ path('delete_paiement') }}" id="deletefacturation">Supprimer ces informations</a>
+                        {% else %}
+
+                            <a class="btn btn-lg btn-block btn-success" id="editpaiementinfos" data-toggle="modal" data-target="#modalnewpaiementsinfos">Ajouter ces informations</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-6" style="">
+                    <div class="card-body">
+                        <div class="card-header"> Mes informations de livraison</div>
+                        {% if livraison is not empty %}
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">Numéro</th>
+                                <td>{{ livraison.0.numero }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Complement</th>
+                                <td>{{ livraison.0.complement | upper }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Rue</th>
+                                <td>{{ livraison.0.rue | upper }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Code Postal</th>
+                                <td>{{ livraison.0.codepostal }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Ville</th>
+                                <td>{{ livraison.0.ville | upper }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        {% else %}
+                            <p class="font-weight-bold text-danger">Aucune information de livraison</p>
+                        {% endif %}
+                        {% if livraison is not empty %}
+                            <a class="btn btn-lg btn-block btn-warning" id="editlivraisoninfos" data-toggle="modal" data-target="#modallivraisoninfos">Modifier ces informations</a>
+                            <a class="btn btn-lg btn-block btn-danger" href="{{ path('delete_livraison') }}" id="deletelivraison">Supprimer ces informations</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-block btn-success" id="addlivraisoninfos" data-toggle="modal" data-target="#modalnewlivraisoninfos">Ajouter ces informations</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-header"> Mes dernières factures</div>
+                    <div class="card-body">
+                        {% if factures is not empty %}
+                            {% for facture in factures %}
+                              <p>Facture <a href="{{ path('factures',{'id': facture.id}) }}">#{{ facture.id }}</a> d'un montant de {{ facture.totalttc }}€TTC datant du {{ facture.date | date('d/m/Y') }}</p>
+                            {% endfor %}
+                        {% else %}
+                        <p class="font-weight-bold text-danger">Il n'existe aucune facture avec ce compte</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalpersonnalInfo" tabindex="-1" role="dialog" aria-labelledby="titleModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleModal">Informations Personnelles</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" id="c_form-h" action="{{ path('update_infos_personnelles') }}" class="">
+                <div class="modal-body">
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Nom</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="nom" required="required" value="{{ user.nom | upper }}">
+                            </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Prénom</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="prenom" required="required" value="{{ user.prenom | capitalize }}"> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Date de naissance</label>
+                            <div class="col-10">
+                                <input type="date" class="form-control form-control-lg" id="inputmailh" name="datenaissance" required="required" value="{{ user.getdatenaissance | date('Y-m-d') }}"> </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Modifier</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalnewpaiementsinfos" tabindex="-1" role="dialog" aria-labelledby="titleModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleModal">Informations de paiement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" id="c_form-h" action="{{ path('add_infos_paiements') }}" class="">
+                    <div class="modal-body">
+                        <p>4010303103564694</p>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Numéro </label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="numerocarte" required="required" value="">
+                            </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Date expiration</label>
+                            <div class="col-10">
+                                <input type="date" class="form-control form-control-lg" id="inputmailh" name="datevalidite" required="required" value=""> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Cryptogramme</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="cryptogramme" required="required" value=""> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Nom</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="nom" required="required" value=""> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Prenom</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="prenom" required="required" value=""> </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalnewlivraisoninfos" tabindex="-1" role="dialog" aria-labelledby="titleModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleModal">Informations de livraison</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" id="c_form-h" action="{{ path('add_infos_livraison') }}" class="">
+                    <div class="modal-body">
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Numéro </label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="numero" required="required"">
+                            </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Complement</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="complement" value=""> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Rue</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="rue" required="required"> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Code Postal</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="codepostal" required="required"> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Ville</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="ville" required="required" > </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Pays</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="pays" required="required"> </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if paiement is not empty %}
+    <div class="modal fade" id="modalpaiementsinfos" tabindex="-1" role="dialog" aria-labelledby="titleModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleModal">Informations de paiement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" id="c_form-h" action="{{ path('update_infos_paiement') }}" class="">
+                <div class="modal-body">
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Numéro </label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="numerocarte" required="required" value="{{ paiement.0.numero }}">
+                            </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Date expiration</label>
+                            <div class="col-10">
+                                <input type="date" class="form-control form-control-lg" id="inputmailh" name="datevalidite" required="required" value="{{ paiement.0.date | date('Y-m-d') }}"> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Cryptogramme</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="cryptogramme" required="required" value="{{ paiement.0.cryptogramme}}"> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Nom</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="nom" required="required" value="{{ paiement.0.nom}}"> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Prenom</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="prenom" required="required" value="{{ paiement.0.prenom}}"> </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Modifier</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if livraison is not empty %}
+    <div class="modal fade" id="modallivraisoninfos" tabindex="-1" role="dialog" aria-labelledby="titleModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleModal">Informations de livraison</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" id="c_form-h" action="{{ path('update_infos_livraison') }}" class="">
+                <div class="modal-body">
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Numéro </label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="numero" required="required" value="{{ livraison.0.numero }}">
+                            </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Complement</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="complement" value="{{ livraison.0.complement }}"> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Rue</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="rue" required="required" value="{{ livraison.0.rue }}"> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Code Postal</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="codepostal" required="required" value="{{ livraison.0.codepostal}}"> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Ville</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="ville" required="required" value="{{ livraison.0.ville }}"> </div>
+                        </div>
+                        <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label col-form-label-lg">Pays</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control form-control-lg" id="inputmailh" name="pays" required="required" value="{{ livraison.0.pays }}"> </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Modifier</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

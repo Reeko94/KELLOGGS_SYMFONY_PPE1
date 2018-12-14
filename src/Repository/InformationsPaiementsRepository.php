@@ -57,7 +57,36 @@ class InformationsPaiementsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('i')
             ->select('i.id,i.numero,i.date,i.cryptogramme,i.nom,i.prenom')
             ->where('i.Utilisateur = :user')
-            ->setParameter('user',$user)
+            ->setParameter('user', $user)
             ->getQuery()->getResult();
     }
+
+    public function updateInfosUser($getUser, $datas)
+    {
+        return $this->createQueryBuilder('i')
+            ->update(InformationsPaiements::class, 'i')
+            ->set('i.numero', ':numero')
+            ->set('i.date', ':date')
+            ->set('i.cryptogramme', ':cryptogramme')
+            ->set('i.nom', ':nom')
+            ->set('i.prenom', ':prenom')
+            ->andWhere('i.Utilisateur = :user')
+            ->setParameter('numero', $datas['numero'])
+            ->setParameter('cryptogramme', $datas['cryptogramme'])
+            ->setParameter('nom', $datas['nom'])
+            ->setParameter('prenom', $datas['prenom'])
+            ->setParameter('date', \DateTime::createFromFormat('Y-m-d', $datas['date']))
+            ->setParameter('user', $getUser)
+            ->getQuery()->getResult();
+    }
+
+    public function deleteFromUser($getUser)
+    {
+        return $this->createQueryBuilder('i')
+            ->delete(InformationsPaiements::class, 'i')
+            ->where('i.Utilisateur = :user')
+            ->setParameter('user', $getUser)
+            ->getQuery()->getResult();
+    }
+
 }

@@ -56,4 +56,35 @@ class InformationsLivraisonsRepository extends ServiceEntityRepository
             ->setParameter('user',$user)
             ->getQuery()->getResult();
     }
+
+    public function updateInfosUser($getUser, array $datas)
+    {
+        return $this->createQueryBuilder('i')
+            ->update(InformationsLivraisons::class,'i')
+            ->set('i.numero',':numero')
+            ->set('i.rue',':rue')
+            ->set('i.codepostal',':codepostal')
+            ->set('i.ville',':ville')
+            ->set('i.pays',':pays')
+            ->set('i.complement',':complement')
+            ->where('i.utilisateur = :user')
+            ->setParameter('numero',$datas['numero'])
+            ->setParameter('rue',$datas['rue'])
+            ->setParameter('codepostal',$datas['codepostal'])
+            ->setParameter('ville',$datas['ville'])
+            ->setParameter('pays',$datas['pays'])
+            ->setParameter('complement',$datas['complement'])
+            ->setParameter('user',$getUser)
+            ->getQuery()->getResult();
+    }
+
+    public function deleteFromUser($getUser)
+    {
+        return $this->createQueryBuilder('i')
+            ->delete(InformationsLivraisons::class, 'i')
+            ->where('i.utilisateur = :user')
+            ->setParameter('user', $getUser)
+            ->getQuery()->getResult();
+    }
+
 }

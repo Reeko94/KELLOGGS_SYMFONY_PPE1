@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Client;
 use App\Entity\Utilisateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -17,6 +18,30 @@ class UtilisateurRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Utilisateur::class);
+    }
+
+    public function updateUtilisateur(Utilisateur $user,array $datas)
+    {
+     $this->createQueryBuilder('u')
+            ->update(Utilisateur::class,'u')
+            ->set('u.nom',':nom')
+            ->set('u.prenom',':prenom')
+            ->where('u.id = :id')
+            ->setParameter('id',$user->getId())
+            ->setParameter('nom', $datas['nom'])
+            ->setParameter('prenom',$datas['prenom'])
+            ->getQuery()->getArrayResult();
+
+     $this->createQueryBuilder('c')
+         ->update(Client::class,'c')
+         ->set('c.date_naissance',':dn')
+         ->where('c.id = :id')
+         ->setParameter('dn', $datas['datenaissance'])
+         ->setParameter('id', $user->getId())
+         ->getQuery()->getResult();
+
+     return true;
+
     }
 
 }

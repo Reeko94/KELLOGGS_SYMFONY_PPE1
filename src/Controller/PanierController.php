@@ -128,6 +128,7 @@ class PanierController extends AbstractController
      */
     public function panierToFacture()
     {
+        //TODO: Ajouter le prix ttc dans l'entite facture
         $panierjson = $this->panierRepository->checkPanier($this->getUser())[0];
         $panierarray = json_decode($panierjson->getArticles());
 
