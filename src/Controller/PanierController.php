@@ -73,17 +73,24 @@ class PanierController extends AbstractController
         $panier = $this->panierRepository->checkPanier($this->getUser())[0]->getArticles();
 
         $articles = json_decode($panier,true);
-
-
-        foreach ($articles as $key => $value) {
-            array_push($articles[$key],$this->articleRepository->findBy(['id' => $value['idarticle']])[0]);
+        $articles = array_values($articles);
+        $sum = 0;
+        if(!empty($articles[0])) {
+            foreach ($articles as $key => $value) {
+                array_push($articles[$key],$this->articleRepository->findBy(['id' => $value['idarticle']])[0]);
+                $sum += $this->articleRepository->findBy(['id' => $value['idarticle']])[0]->getPrix() * $value['qte'];
+            }
         }
+
+        if(count($articles[0]) === 0)
+            $articles = 0;
 
         return $this->render('panier/index.html.twig', [
             'nb' => $this->getNBArticle(),
             'infosarticles' => $articles,
             'controller_name' => 'PanierController',
             'user' => $this->getUser(),
+            'sum' => $sum,
             'infosPaiement' => $this->infosPaiementsRepository->getInfosByUser($this->getUser()),
             'infosLivraison' => $this->infosLivraisonsRepository->getInfosByUser($this->getUser())
         ]);
@@ -94,14 +101,23 @@ class PanierController extends AbstractController
      */
     public function deleteArticlePanier(Request $request)
     {
+        $redirect = false;
         $panier = $this->panierRepository->checkPanier($this->getUser())[0]->getArticles();
         $articles = json_decode($panier,true);
         foreach ($articles as $article){
             if($article['idarticle'] == $request->get('id'))
                 unset($articles[(array_keys($articles,$article)[0])]);
         }
+
+        if(sizeof($articles) == 0) {
+            $articles = [new \stdClass()];
+            $redirect = true;
+        }
+
         $this->panierRepository->setPanier($this->getUser(),$articles);
-        return $this->redirectToRoute('panier');
+        $route = ($redirect) ?  'home' : 'panier';
+
+        return $this->redirectToRoute($route);
     }
 
     /**
@@ -126,7 +142,7 @@ class PanierController extends AbstractController
      * @Route("/panier/submit",name="panier_to_facture")
      * @throws \Exception
      */
-    public function panierToFacture()
+    public function panierToFacture(Request $request)
     {
         //TODO: Ajouter le prix ttc dans l'entite facture
         $panierjson = $this->panierRepository->checkPanier($this->getUser())[0];
@@ -138,6 +154,8 @@ class PanierController extends AbstractController
         $facture->setClient($this->getUser());
         $date = new \DateTime(date('Y-m-d',time()));
         $facture->setDate($date);
+        $facture->setTotalttc($request->get('totalttc'));
+
 
         $em->persist($facture);
         $em->flush();
@@ -155,16 +173,4 @@ class PanierController extends AbstractController
         $this->addFlash('success','Panier payé avec succès');
         return $this->redirect('/');
     }
-    /**
-
-
-
-
-
-
-
-
-    $em->flush();
-
-     */
 }

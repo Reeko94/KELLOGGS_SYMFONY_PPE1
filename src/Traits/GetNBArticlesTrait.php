@@ -30,11 +30,13 @@ trait GetNBArticlesTrait
 
     public function getNBArticle()
     {
-        if($user = $this->getUser()){
+        if ($user = $this->getUser()) {
             $panier = $this->panierRepository->checkPanier($user);
-            return count(json_decode($panier[0]->getArticles()));
-        }else {
-            return 0;
+            if (count((array)json_decode($panier[0]->getArticles())[0]) == 0) {
+                return $this->redirectToRoute('home');
+            } else {
+                return count(json_decode($panier[0]->getArticles()));
+            }
         }
     }
 }

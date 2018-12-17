@@ -31,7 +31,7 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/new", name="articles_new", methods="GET|POST")
      */
-    /*
+
     public function new(Request $request): Response
     {
         $article = new Articles();
@@ -54,14 +54,15 @@ class ArticlesController extends AbstractController
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute('articles_index');
+            return $this->redirectToRoute('fabricants_index');
         }
 
         return $this->render('articles/new.html.twig', [
+            'nb' => $this->getNBArticle(),
             'article' => $article,
             'form' => $form->createView(),
         ]);
-    }*/
+    }
 
     /**
      * @Route("/{id}/edit", name="articles_edit", methods="GET|POST")
@@ -69,7 +70,6 @@ class ArticlesController extends AbstractController
      * @param Articles $article
      * @return Response
      */
-    /**
     public function edit(Request $request, Articles $article): Response
     {
         $form = $this->createForm(ArticlesType::class, $article);
@@ -102,7 +102,7 @@ class ArticlesController extends AbstractController
             'form' => $form->createView(),
             'nb' => $this->getNBArticle()
         ]);
-    }**/
+    }
 
     /**
      * @Route("/{id}", name="articles_delete", methods="DELETE")

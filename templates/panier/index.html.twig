@@ -71,42 +71,54 @@
             </thead>
             <tbody>
             {% for article in infosarticles %}
-            <tr>
-                <td>
-                    <figure class="media">
-                        <div class="img-wrap"><img src="/uploads/article/{{ article.0.urlMedia }}" class="img-thumbnail img-sm"></div>
-                        <figcaption class="media-body">
-                            <h6 class="title text-truncate">{{ article.0.libelle }}</h6>
-                        </figcaption>
-                    </figure>
-                </td>
-                <td>
-                    <form action="{{ path('updatepanier') }}" method="post">
-                        <input type="hidden" name="id" value="{{ article.0.id }}">
-                        <input type="number" name="qte" value="{{ article.qte }}" class="form-control">
-                        <button class="btn btn-success mt-1" type="submit" name="add">Mettre à jour</button>
-                    </form>
-                </td>
-                <td>
-                    <div class="price-wrap">
-                        <var class="price">{{ article.qte * article.0.prix }} €</var>
-                    </div> <!-- price-wrap .// -->
-                </td>
-                <td class="text-right">
-                    <a href="{{ path('deletearticlepanier', {'id': article.idarticle}) }}" class="btn btn-danger btn-round"> &times; Supprimer</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <figure class="media">
+                            <div class="img-wrap"><img src="/uploads/article/{{ article.0.urlMedia }}" class="img-thumbnail img-sm"></div>
+                            <figcaption class="media-body">
+                                <h6 class="title text-truncate">{{ article.0.libelle }}</h6>
+                            </figcaption>
+                        </figure>
+                    </td>
+                    <td>
+                        <form action="{{ path('updatepanier') }}" method="post">
+                            <input type="hidden" name="id" value="{{ article.0.id }}">
+                            <input type="number" name="qte" value="{{ article.qte }}" class="form-control">
+                            <button class="btn btn-success mt-1" type="submit" name="add">Mettre à jour</button>
+                        </form>
+                    </td>
+                    <td>
+                        <div class="price-wrap">
+                            <p class="price">{{ article.qte * article.0.prix }} €</p>
+                        </div> <!-- price-wrap .// -->
+                    </td>
+                    <td class="text-right">
+                        <a href="{{ path('deletearticlepanier', {'id': article.idarticle}) }}" class="btn btn-danger btn-round"> &times; Supprimer</a>
+                    </td>
+                </tr>
             {% endfor %}
+            <tr>
+                <td></td>
+                <th scope="col">TOTAL</th>
+                <td><p> {{ sum }} €</p></td>
+            </tr>
             </tbody>
         </table>
-        <button type="button" class="btn mb-2 btn-success" id="validate">Valider le panier</button>
+
+        {% if(infosarticles |length > 0) %}
+            <button type="button" class="btn mb-2 btn-success" id="validate">Valider le panier</button>
+        {% else %}
+            <h1 class="text-center">
+                Votre panier est vide.<br> Cliquez <a href="{{ path('fabricants_index') }}">ici</a>
+            </h1>
+        {% endif %}
+
     </div>
 
     <div class="container card mt-5 d-none" id="details">
 
         <div class="card-body">
-
-            <form action="" method="POST">
+            <form action="{{ path('panier_to_facture') }}" method="post">
                 <div class="form-group">
                     <label for="infosL">Merci de choisir vos informations de livraisons</label>
                     {% if infosLivraison is not empty %}
@@ -128,7 +140,8 @@
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    <a href="{{ path('panier_to_facture') }}" class="btn btn-success btn-lg btn-block">Payer</a>
+                    <input type="hidden" name="totalttc" value="{{ sum }}">
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Payer</button>
                 </div>
             </form>
         </div>

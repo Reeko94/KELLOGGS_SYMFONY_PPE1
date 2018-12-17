@@ -41,6 +41,10 @@ class FacturesController extends AbstractController
      */
     private $composeRepository;
 
+    /**
+     * @var PanierRepository
+     */
+    private $panierRepository;
 
     /**
      * FacturesController constructor.
@@ -54,13 +58,14 @@ class FacturesController extends AbstractController
                                 InformationsLivraisonsRepository $informationsLivraisonsRepository,
                                 InformationsPaiementsRepository $informationsPaiementsRepository,
                                 ArticlesRepository $articlesRepository,
-                                ComposeRepository $composeRepository)
+                                ComposeRepository $composeRepository,PanierRepository $panierRepository)
     {
         $this->factureRepository = $factureRepository;
         $this->informationsLivraisonsRepository = $informationsLivraisonsRepository;
         $this->informationsPaiementRepository = $informationsPaiementsRepository;
         $this->articlesRepository = $articlesRepository;
         $this->composeRepository = $composeRepository;
+        $this->panierRepository = $panierRepository;
     }
 
     /**

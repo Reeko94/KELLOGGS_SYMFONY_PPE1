@@ -1,0 +1,45 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block body %}
+                <div class="row mt-5">
+                    <div class="col">
+                        <div class="collapse multi-collapse show" id="fabricants">
+                            <div class="row card card-body">
+                                <h1>Choisir l'espace concernée par votre demande</h1>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="card card-body col-md-6">
+                                    <button class="btn-lg btn-block btn-success">
+                                        <a class="link text-white" href="{{ path('dashboard_fabricants') }}">
+                                            <i class="fas fa-building text-center mt-2" style="font-size: 48px;"></i><br>
+                                        Gestion des fabricants
+                                        </a>
+                                    </button>
+                                </div>
+                                <div class="card card-body col-md-6">
+                                    <button class="btn-lg btn-block btn-warning">
+                                        <i class="fas fa-building text-center mt-2" style="font-size: 48px;"></i><br>
+                                        Gestions des articles
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class="row mt-5">
+                                <div class="card card-body col-md-12">
+                                    <button class="btn-lg btn-block btn-danger">
+                                        <i class="fas fa-building text-center mt-2" style="font-size: 48px;"></i><br>
+                                        Gestion des utilisateurs
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+{% endblock %}

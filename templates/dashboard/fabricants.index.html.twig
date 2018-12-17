@@ -1,0 +1,95 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block body %}
+
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th>Nom</th>
+                <th>Type de nutrition</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in fabricants %}
+            <tr>
+                <th scope="row">{{ f.id }}</th>
+                <td><h5>{{ f.libelle }}</h5></td>
+                <td><h5>{{ f.gettypenutrition.libelle }}</h5></td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a class="text-white btn btn-sm btn-warning mr-2" id="edit" data-id="{{ f.id }}">Modifier</a>
+                        <a class="text-white btn btn-sm btn-danger" id="delete" data-id="{{ f.id }}">Supprimer</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modifier le fabricant</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ path('updateinfosformarques') }}" method="POST" id="editform">
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label for="libelle">Nom de la marque</label>
+                                <input type="text" name="libelle" class="form-control" id="libelle">
+                                <input type="hidden" name="id" id="id">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("#edit").on('click',function () {
+                var id = $(this).data('id');
+                $.ajax({
+                    type:'GET',
+                    url:'getinfosformarques',
+                    data: {
+                        id:id
+                    },
+                    success:function (data) {
+                        $("#libelle").val(data.libelle);
+                        $("#id").val(data.id);
+                    }
+                });
+                $(".modal").modal('show');
+            });
+
+            $("#delete").on('click',function () {
+                var id = $(this).data('id');
+                var answer = confirm('Etes vous sur de vouloir supprimer ce fabricant ? Si oui, tous les articles seront également supprimés');
+                if(answer){
+                    $.ajax({
+                        type:'GET',
+                        url:'deletemarque',
+                        data:{
+                            id:id
+                        },
+                        success:function (data) {
+                            console.log(data);
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+{% endblock %}

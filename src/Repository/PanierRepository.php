@@ -61,6 +61,15 @@ class PanierRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return array
+     */
+    public function getAllPanier()
+    {
+        return $this->createQueryBuilder('p')->select()
+            ->getQuery()->getArrayResult();
+    }
+
+    /**
      * @param $idUser
      * @param $article
      * @return bool
@@ -70,12 +79,15 @@ class PanierRepository extends ServiceEntityRepository
         //TODO : dynamisme sur la quantité ?
         $panier = $this->checkPanier($idUser);
         $articles = json_decode($panier[0]->getArticles(),true);
-        foreach($articles as $a) {
-            if ($article == $a['idarticle'])
-                return $this->updatePanier($idUser, $article);
+        $articles = array_values($articles);
+        // S'il y a au moins un article
+        if(!count($articles[0]) == 0){
+            foreach($articles as $a) {
+                if ($article == $a['idarticle'])
+                    return $this->updatePanier($idUser, $article);
+            }
         }
-
-        $articles[] =[
+        $articles[] = [
             'idarticle'=> $article,
             'qte'=> 1
         ];
@@ -94,17 +106,20 @@ class PanierRepository extends ServiceEntityRepository
     /**
      * @param $idUser
      * @param $article
+     * @param bool $increment
+     * @param int $qte
+     * @param bool $reset
      * @return bool
      */
     public function updatePanier($idUser,$article,$increment = true,$qte = 0,$reset = false)
     {
         $panier = $this->checkPanier($idUser);
         $panierJ = json_decode($panier[0]->getArticles(),true);
+        $panierJ = array_values($panierJ);
         $key = array_search($article, array_column($panierJ, 'idarticle'));
-
         ($increment) ? $panierJ[$key]['qte'] = $panierJ[$key]['qte'] + $qte : $panierJ[$key]['qte'] = $panierJ[$key]['qte'] - $qte;
 
-        if($reset) $panierJ[$key]['qte'] = $qte;
+        if($reset) $panierJ[$key]['qte'] = (int) $qte;
 
         $this->createQueryBuilder('p')
             ->update(Panier::class,'p')
@@ -117,6 +132,11 @@ class PanierRepository extends ServiceEntityRepository
         return true;
     }
 
+    /**
+     * @param $idUser
+     * @param $panier
+     * @return bool
+     */
     public function setPanier($idUser,$panier)
     {
         $this->createQueryBuilder('p')
@@ -130,6 +150,10 @@ class PanierRepository extends ServiceEntityRepository
         return true;
     }
 
+    /**
+     * @param $idUser
+     * @return mixed
+     */
     public function destroyPanier($idUser)
     {
         return $this->createQueryBuilder('p')
@@ -138,6 +162,18 @@ class PanierRepository extends ServiceEntityRepository
             ->where('p.utilisateur = :user')
             ->setParameter('article','[ ]')
             ->setParameter('user',$idUser)
+            ->getQuery()->getResult();
+    }
+
+    // deletearticleforpanier
+    public function updatePanierWithId($articles, int $idPanier)
+    {
+        return $this->createQueryBuilder('p')
+            ->update(Panier::class,'p')
+            ->set('p.articles',':articles')
+            ->where('p.id = :id')
+            ->setParameter('articles',$articles)
+            ->setParameter('id',$idPanier)
             ->getQuery()->getResult();
     }
 }

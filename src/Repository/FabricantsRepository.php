@@ -47,4 +47,38 @@ class FabricantsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function getArrayResult($id)
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.id = :id')
+            ->setParameter('id',$id)->getQuery()->getArrayResult();
+    }
+
+    public function updateFabricant($id,$libelle)
+    {
+        return $this->createQueryBuilder('f')
+            ->update(Fabricants::class,'f')
+            ->set('f.libelle',':libelle')
+            ->where('f.id = :id')
+            ->setParameter('id' , $id)
+            ->setParameter('libelle',$libelle)
+            ->getQuery()->getResult();
+    }
+
+    /**
+     * @param $id
+     */
+    public function deletefromid($id)
+    {
+        return $this->createQueryBuilder('f')
+            ->delete(Fabricants::class,'f')
+            ->where('f.id = :id')
+            ->setParameter('id',$id)
+            ->getQuery()->getResult();
+    }
 }
