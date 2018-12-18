@@ -1,0 +1,50 @@
+{% extends 'admin.base.html.twig' %}
+{% block body %}
+    <div class="row mt-5">
+        <div class="col-md-12 col-sm-12 text-center">
+            <h1>{{ user.nom | upper }} {{ user.prenom | capitalize }}</h1>
+            {% if user.type == 2 %}
+            <em>Embauché le {{ user.getdateentree | date(' d/m/Y') }}</em>
+            <p class="font-weight-bold">{{ user.getposte }}</p>
+            {% else %}
+            <em>Client créer le {{ user.getdateinscription | date('d/m/Y') }}</em>
+            {% endif %}
+        </div>
+        <div class="col-md-12 col-sm-12">
+            <table class="table table-stripped mt-2">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Adresse e-mail</th>
+                        <th scope="col">Type de compte</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ user.id }}</th>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% if user.type == 1 %}
+                                Client
+                            {% else %}
+                                Commercial
+                            {% endif %}
+                        </td>
+                        <td>
+                                {% if user.type == 1 %}
+                            <a href="{{ path('dashboard_user_promote',{id:user.id}) }}" class="text-white btn btn-danger">
+                                    Promouvoir
+                            </a>
+                            {% else %}
+                            <a href="{{ path('dashboard_user_demote',{id:user.id}) }}" class="text-white btn btn-danger">
+                                    Retrograder
+                                {% endif %}
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

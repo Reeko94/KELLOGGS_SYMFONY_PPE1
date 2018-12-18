@@ -47,4 +47,14 @@ class ClientRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function setInactif($idUser)
+    {
+        return $this->createQueryBuilder('c')
+            ->update(Client::class,'c')
+            ->set('c.actif',0)
+            ->where('c.id = :id')
+            ->setParameter('id',$idUser)
+            ->getQuery()->getResult();
+    }
 }

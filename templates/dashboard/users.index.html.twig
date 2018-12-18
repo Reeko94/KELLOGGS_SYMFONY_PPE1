@@ -1,0 +1,21 @@
+{% extends 'admin.base.html.twig' %}
+{% block body %}
+    <div class="mt-5 jumbotron pt-3 pb-1">
+        <p>Légende :</p>
+        <p><span class="font-weight-bold text-danger">Commercial / Administrateur</span> &nbsp; <span class="font-weight-bold">Utilisateur</span></p>
+    </div>
+    <div class="row mt-2">
+        {% for user in users %}
+        <div class="col-md-4 col-sm-12 mb-3">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="../user-male-icon.png"  alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title {% if user.type == 2 %} text-danger {% endif %}">{{ user.nom | upper }} {{ user.prenom | capitalize }}</h5>
+                    <p class="card-text">{% if user.type == 1 %} Inscrit depuis le {{ user.getdateinscription | date('d m Y') }} {% else %} Entrée dans l'entreprise le {{ user.getdateentree  | date('d m Y') }} {% endif %}</p>
+                    <a href="{{ path('dashboard_user',{id:user.id}) }}" class="btn btn-primary">Plus d'information</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

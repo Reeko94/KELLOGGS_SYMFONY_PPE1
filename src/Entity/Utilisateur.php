@@ -60,9 +60,23 @@ class Utilisateur implements UserInterface,\Serializable
      */
     private $informationsLivraisons;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $actif;
+
     public function __construct()
     {
         $this->informationsLivraisons = new ArrayCollection();
+    }
+
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
     public function getId(): ?int
@@ -253,6 +267,18 @@ class Utilisateur implements UserInterface,\Serializable
                 $informationsLivraison->setUtilisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getActif(): ?int
+    {
+        return $this->actif;
+    }
+
+    public function setActif(int $actif): self
+    {
+        $this->actif = $actif;
 
         return $this;
     }

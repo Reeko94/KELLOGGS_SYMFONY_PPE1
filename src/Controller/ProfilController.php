@@ -101,6 +101,11 @@ class ProfilController extends AbstractController
             'nom' =>$request->get("nom"),
             'prenom' => $request->get('prenom'),
         ];
+        if(sizeof(intval($request->get('cryptogramme'))) > 3) {
+
+            return $this->redirectToRoute('profil');
+        }
+
         if(!$this->Luhn($datas['numero'])) {
             $this->addFlash('danger', 'Numéro de carte incorrect');
             return $this->redirectToRoute('profil');

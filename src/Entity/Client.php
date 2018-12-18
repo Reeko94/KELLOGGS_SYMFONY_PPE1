@@ -26,6 +26,11 @@ class Client extends Utilisateur
      */
     private $factures;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $actif;
+
     public function __construct()
     {
         parent::__construct();

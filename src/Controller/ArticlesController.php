@@ -105,6 +105,22 @@ class ArticlesController extends AbstractController
     }
 
     /**
+     * @Route("/{id}", name="articles_show", methods="GET")
+     */
+    public function show(Articles $article): Response
+    {
+        return $this->render('articles/show.html.twig', ['article' => $article,'nb' => $this->getNBArticle()]);
+    }
+
+    /**
+     * @Route("/", name="articles_index", methods="GET")
+     */
+    public function index(ArticlesRepository $articlesRepository): Response
+    {
+        return $this->render('articles/index.html.twig', ['articles' => $articlesRepository->findAll(),'nb'=>$this->getNBArticle()]);
+    }
+
+    /**
      * @Route("/{id}", name="articles_delete", methods="DELETE")
      */
     public function delete(Request $request, Articles $article): Response

@@ -44,4 +44,14 @@ class UtilisateurRepository extends ServiceEntityRepository
 
     }
 
+    public function orderByType()
+    {
+        return $this->createQueryBuilder('u')
+            ->select()
+            ->orderBy('u.type','DESC')
+            ->where('u.actif = :actif')
+            ->setParameter('actif',1)
+            ->getQuery()->getResult();
+    }
+
 }

@@ -19,6 +19,16 @@ class CommercialRepository extends ServiceEntityRepository
         parent::__construct($registry, Commercial::class);
     }
 
+    public function setInactif(int $id)
+    {
+        return $this->createQueryBuilder('c')
+            ->update(Commercial::class,'c')
+            ->set('c.actif',0)
+            ->where('c.id = :id')
+            ->setParameter('id',$id)
+            ->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Commercial[] Returns an array of Commercial objects
     //  */

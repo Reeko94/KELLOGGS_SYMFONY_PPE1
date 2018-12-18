@@ -2,17 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
+use App\Entity\Commercial;
 use App\Repository\ArticlesRepository;
+use App\Repository\ClientRepository;
+use App\Repository\CommercialRepository;
 use App\Repository\FabricantsRepository;
 use App\Repository\PanierRepository;
-use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerBuilder;
+use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonDecode;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * Class DashboardController
@@ -38,16 +41,46 @@ class DashboardController extends AbstractController
     private $articleRepository;
 
     /**
+     * @var UtilisateurRepository
+     */
+    private $utilisateurRepository;
+
+    /**
+     * @var CommercialRepository
+     */
+    private $commercialRepository;
+
+    /**
+     * @var ClientRepository
+     */
+    private $clientRepository;
+
+    /**
      * DashboardController constructor.
+     * @param CommercialRepository $commercialRepository
+     * @param ClientRepository $clientRepository
+     * @param UtilisateurRepository $utilisateurRepository
      * @param FabricantsRepository $fabricantsRepository
      * @param PanierRepository $panierRepository
      * @param ArticlesRepository $articlesRepository
      */
-    public function __construct(FabricantsRepository $fabricantsRepository,PanierRepository $panierRepository,ArticlesRepository $articlesRepository)
+    public function __construct(CommercialRepository $commercialRepository,ClientRepository $clientRepository,UtilisateurRepository $utilisateurRepository,FabricantsRepository $fabricantsRepository,PanierRepository $panierRepository,ArticlesRepository $articlesRepository)
     {
+        $this->clientRepository = $clientRepository;
+        $this->commercialRepository = $commercialRepository;
+        $this->utilisateurRepository = $utilisateurRepository;
         $this->articleRepository = $articlesRepository;
         $this->fabricantsRepository = $fabricantsRepository;
         $this->panierRepository = $panierRepository;
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    private function isAdmin()
+    {
+        if($this->getUser()->getType() == 1)
+            return $this->redirectToRoute('home');
     }
 
     /**
@@ -55,6 +88,7 @@ class DashboardController extends AbstractController
      */
     public function index()
     {
+        $this->isAdmin();
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
         ]);
@@ -65,9 +99,97 @@ class DashboardController extends AbstractController
      */
     public function fabricantsview()
     {
+        $this->isAdmin();
         return $this->render('dashboard/fabricants.index.html.twig',[
             'fabricants' => $this->fabricantsRepository->findAll()
         ]);
+    }
+
+    /**
+     * @Route("/users",name="dashboard_users")
+     */
+    public function allusersview()
+    {
+        $this->isAdmin();
+        return $this->render('dashboard/users.index.html.twig',[
+            'users' => $this->utilisateurRepository->orderByType()
+        ]);
+    }
+
+    /**
+     * @Route("/user/{id}",name="dashboard_user")
+     * @param Request $request
+     * @return Response
+     */
+    public function userview(Request $request)
+    {
+        $this->isAdmin();
+        $user = $this->utilisateurRepository->findOneBy(['id' =>$request->get('id')]);
+        return $this->render('dashboard/users.show.html.twig',[
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/user/{id}/demote",name="dashboard_user_demote")
+     * @param Request $request
+     */
+    public function demote(Request $request)
+    {
+        $this->isAdmin();
+        $id = (int) $request->get('id');
+        $commercial = $this->commercialRepository->findOneBy(['id' => $id]);
+        $this->commercialRepository->setInactif($id);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $client = new Client();
+        $client->setId($id);
+        $client->setEmail($commercial->getEmail());
+        $client->setPassword($commercial->getPassword());
+        $client->setType(1);
+        $client->setNom($commercial->getNom());
+        $client->setPrenom($commercial->getPrenom());
+        $client->setActif(1);
+        $client->setDateInscription(new \DateTime('now'));
+        $client->setDateNaissance(new \DateTime('now'));
+
+        $em->persist($client);
+        $em->flush();
+
+        return $this->redirectToRoute('dashboard_user',['id' => $client->getId()]);
+    }
+
+    /**
+     * @param Request $request
+     * @Route("/user/{id}/promote",name="dashboard_user_promote")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
+     */
+    public function promote(Request $request)
+    {
+        $this->isAdmin();
+        $id = (int) $request->get('id');
+        $client = $this->clientRepository->findOneBy(['id' => $id]);
+        $this->clientRepository->setInactif($id);
+
+        $commercial = new Commercial();
+        $commercial->setId($id);
+        $commercial->setEmail($client->getEmail());
+        $commercial->setPassword($client->getPassword());
+        $commercial->setNom($client->getNom());
+        $commercial->setPrenom($client->getPrenom());
+        $commercial->setType(2);
+        $commercial->setDiscr('Commercial');
+        $commercial->setActif(1);
+        $commercial->setDateEntree(new \DateTime());
+        $commercial->setPoste(' ');
+
+        $em =$this->getDoctrine()->getManager();
+        $em->persist($commercial);
+        $em->flush();
+
+        return $this->redirectToRoute('dashboard_user',['id'=>$commercial->getId()]);
     }
 
     /**
@@ -77,6 +199,7 @@ class DashboardController extends AbstractController
      */
     public function getinfosformarque(Request $request)
     {
+        $this->isAdmin();
         $datas = $this->fabricantsRepository->getArrayResult($request->get('id'));
         return JsonResponse::create($datas[0]);
     }
@@ -88,6 +211,7 @@ class DashboardController extends AbstractController
      */
     public function updateinfosformarques(Request $request)
     {
+        $this->isAdmin();
         $id = $request->get('id');
         $libelle = $request->get('libelle');
         $this->fabricantsRepository->updateFabricant($id,$libelle);
@@ -101,6 +225,7 @@ class DashboardController extends AbstractController
      */
     public function deleteMarque(Request $request)
     {
+        $this->isAdmin();
         $fabricantID = $this->fabricantsRepository->getArrayResult($request->get('id'))[0]['id'];
         $allPanier = $this->panierRepository->getAllPanier();
         // Pour tous les panier

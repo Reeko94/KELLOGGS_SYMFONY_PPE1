@@ -19,6 +19,11 @@ class Commercial extends Utilisateur
      */
     private $date_entree;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $actif;
+
     public function getPoste(): ?string
     {
         return $this->poste;
