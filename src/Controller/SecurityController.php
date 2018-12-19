@@ -85,7 +85,7 @@ class SecurityController extends AbstractController
             $lastUser =  $this->utilisateurRepository->findOneBy([],['id' => 'DESC']);
             $panier = new Panier();
             $panier->setUtilisateur($lastUser);
-            $panier->setArticles((string) array(new \stdClass()));
+            $panier->setArticles("[{}]");
 
             $entityManager->persist($panier);
             $entityManager->flush();
