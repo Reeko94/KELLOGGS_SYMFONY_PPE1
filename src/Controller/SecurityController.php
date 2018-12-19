@@ -75,6 +75,7 @@ class SecurityController extends AbstractController
             $user->setPassword($password);
             $user->setDateInscription(new \DateTime('now'));
             $user->setType(1);
+            $user->setActif(1);
 
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
@@ -84,7 +85,7 @@ class SecurityController extends AbstractController
             $lastUser =  $this->utilisateurRepository->findOneBy([],['id' => 'DESC']);
             $panier = new Panier();
             $panier->setUtilisateur($lastUser);
-            $panier->setArticles("[]");
+            $panier->setArticles((string) array(new \stdClass()));
 
             $entityManager->persist($panier);
             $entityManager->flush();
