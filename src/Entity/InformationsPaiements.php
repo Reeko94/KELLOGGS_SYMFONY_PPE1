@@ -43,7 +43,7 @@ class InformationsPaiements
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="informationsPaiements")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false,onDelete="CASCADE")
      */
     private $Utilisateur;
 

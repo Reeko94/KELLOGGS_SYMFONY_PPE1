@@ -156,7 +156,7 @@ class DashboardController extends AbstractController
 
         $em->persist($client);
         $em->flush();
-
+        $this->deleteAfterUpdate();
         return $this->redirectToRoute('dashboard_user',['id' => $client->getId()]);
     }
 
@@ -166,11 +166,11 @@ class DashboardController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Exception
      */
-    public function promote(Request $request)
+    public function promote(Request $request,ClientRepository $clientRepository)
     {
         $this->isAdmin();
         $id = (int) $request->get('id');
-        $client = $this->clientRepository->findOneBy(['id' => $id]);
+        $client = $clientRepository->findOneBy(['id'=>$id]);
         $this->clientRepository->setInactif($id);
 
         $commercial = new Commercial();
@@ -188,7 +188,7 @@ class DashboardController extends AbstractController
         $em =$this->getDoctrine()->getManager();
         $em->persist($commercial);
         $em->flush();
-
+        $this->deleteAfterUpdate();
         return $this->redirectToRoute('dashboard_user',['id'=>$commercial->getId()]);
     }
 
@@ -260,5 +260,10 @@ class DashboardController extends AbstractController
         }
         $this->fabricantsRepository->deletefromid($request->get('id'));
         return $this->redirectToRoute('dashboard_index');
+    }
+
+    private function deleteAfterUpdate()
+    {
+        return $this->utilisateurRepository->deleteAfterUpdate();
     }
 }

@@ -25,7 +25,7 @@ class Factures
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="factures")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false,onDelete="CASCADE")
      */
     private $client;
 

@@ -44,6 +44,9 @@ class UtilisateurRepository extends ServiceEntityRepository
 
     }
 
+    /**
+     * @return mixed
+     */
     public function orderByType()
     {
         return $this->createQueryBuilder('u')
@@ -51,6 +54,17 @@ class UtilisateurRepository extends ServiceEntityRepository
             ->orderBy('u.type','DESC')
             ->where('u.actif = :actif')
             ->setParameter('actif',1)
+            ->getQuery()->getResult();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function deleteAfterUpdate()
+    {
+        return $this->createQueryBuilder('u')
+            ->delete(Utilisateur::class,'u')
+            ->where('u.actif = 0')
             ->getQuery()->getResult();
     }
 
