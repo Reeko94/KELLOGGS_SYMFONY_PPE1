@@ -37,10 +37,10 @@ class FabricantsController extends AbstractController
      * @param FabricantsRepository $fabricantsRepository
      * @return Response
      */
-    public function index(FabricantsRepository $fabricantsRepository): Response
+    public function index(FabricantsRepository $fabricantsRepository,ArticlesRepository $articlesRepository): Response
     {
         return $this->render('fabricants/index.html.twig', [
-            'fabricants' => $fabricantsRepository->findAll(),
+            'fabricants' => $fabricantsRepository->getAll(),
             'current_menu' => 'marques',
             'nb' => $this->getNBArticle()
         ]);

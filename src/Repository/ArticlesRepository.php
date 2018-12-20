@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Articles;
+use App\Entity\Fabricants;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -22,5 +23,14 @@ class ArticlesRepository extends ServiceEntityRepository
     public function getlastfive()
     {
         return $this->findBy([],["id" => "DESC"],5);
+    }
+
+    public function countByFabricant(Fabricants $fabricant)
+    {
+        return $this->createQueryBuilder('a')
+            ->select('COUNT(a.id)')
+            ->where('a.fabricant = :f')
+            ->setParameter('f',$fabricant)
+            ->getQuery()->getOneOrNullResult();
     }
 }

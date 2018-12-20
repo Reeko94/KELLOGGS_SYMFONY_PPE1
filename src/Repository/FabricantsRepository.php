@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Articles;
 use App\Entity\Fabricants;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -79,6 +80,20 @@ class FabricantsRepository extends ServiceEntityRepository
             ->delete(Fabricants::class,'f')
             ->where('f.id = :id')
             ->setParameter('id',$id)
+            ->getQuery()->getResult();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->createQueryBuilder('f')
+            ->select('f.id,f.libelle,f.logo,COUNT(a.id)')
+            ->from(Articles::class,'a')
+            ->where('a.disponibilite = 1')
+            ->andWhere('a.fabricant = f.id')
+            ->groupBy('f.id')
             ->getQuery()->getResult();
     }
 }

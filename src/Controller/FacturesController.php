@@ -84,7 +84,6 @@ class FacturesController extends AbstractController
 
         foreach ($composeArticle as $article => $value) {
             //$articlesRepository->findby(['id_facture' => $value->getIdArticle()->getLibelle()])
-            dd($this->articlesRepository->find($value->getIdArticle()));
             $articlesFacture[$this->articlesRepository->find($value->getIdArticle())->getLibelle()] = $value->getQuantite();
             $prixArticle[$this->articlesRepository->find($value->getIdArticle())->getLibelle()] = $this->articlesRepository->find($value->getIdArticle())->getPrix();
         }

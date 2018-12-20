@@ -159,12 +159,14 @@ class PanierRepository extends ServiceEntityRepository
      */
     public function destroyPanier($idUser)
     {
+        $articles = [new \stdClass()];
         return $this->createQueryBuilder('p')
             ->update(Panier::class,'p')
             ->set('p.articles',':article')
             ->where('p.utilisateur = :user')
-            ->setParameter('article','[ ]')
+            ->setParameter('article',':article')
             ->setParameter('user',$idUser)
+            ->setParameter('article',json_encode($articles))
             ->getQuery()->getResult();
     }
 

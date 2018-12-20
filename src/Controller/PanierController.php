@@ -10,7 +10,6 @@ use App\Repository\InformationsLivraisonsRepository;
 use App\Repository\InformationsPaiementsRepository;
 use App\Repository\PanierRepository;
 use App\Repository\UtilisateurRepository;
-use JMS\Serializer\SerializerBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -147,7 +146,6 @@ class PanierController extends AbstractController
         //TODO: Ajouter le prix ttc dans l'entite facture
         $panierjson = $this->panierRepository->checkPanier($this->getUser())[0];
         $panierarray = json_decode($panierjson->getArticles());
-
         $em = $this->getDoctrine()->getManager();
 
         $facture = new Factures();
@@ -161,6 +159,7 @@ class PanierController extends AbstractController
         $em->flush();
 
         $lastInsertID = $this->factureRepository->findBy(['client'=>$this->getUser()],['id'=>'DESC'],1)[0]->getId();
+
         foreach ($panierarray as $article) {
             $compose = new Compose();
             $compose->setIdFacture($lastInsertID);
@@ -169,6 +168,7 @@ class PanierController extends AbstractController
             $em->persist($compose);
             $em->flush();
         }
+
         $this->panierRepository->destroyPanier($this->getUser());
         $this->addFlash('success','Panier payé avec succès');
         return $this->redirect('/');

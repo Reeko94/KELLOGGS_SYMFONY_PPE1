@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Fabricants index{% endblock %}
-
 {% block body %}
     <h1 class="text-center">Nos marques</h1>
     <div class="container mt-4 mb-4">
@@ -13,7 +12,7 @@
                         <img class="card-img-top" src="/uploads/fabricant/{{ f.logo }}" height="200" width="100" alt="Card image cap">
                         {% endif %}
                         <div class="card-body">
-                            <h5 class="card-title"><a href="{{ path('fabricants_show', {id: f.id}) }}">{{ f.libelle }}</a></h5>
+                            <h5 class="card-title"><a href="{{ path('fabricants_show', {id: f.id}) }}">{{ f.libelle }}</a> -- {{ f.1 }} articles</h5>
                             <p class="card-text">
                                 {% if app.user is not null and app.user.type > 1 %}
                                 <a class="btn btn-success btn-block" href="{{ path('fabricants_edit',{id: f.id}) }}">Modifier</a>
