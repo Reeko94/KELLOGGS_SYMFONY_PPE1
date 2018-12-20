@@ -78,25 +78,28 @@ class PanierRepository extends ServiceEntityRepository
     {
         //TODO : dynamisme sur la quantité ?
         $panier = $this->checkPanier($idUser);
+        $countPanier = (count((array)json_decode($panier[0]->getArticles())[0]));
         $articles = json_decode($panier[0]->getArticles(),true);
         $articles = array_values($articles);
         // S'il y a au moins un article
-        if(!count($articles[0]) == 0){
+        if($countPanier >= 1){
             foreach($articles as $a) {
-                if ($article == $a['idarticle'])
-                    return $this->updatePanier($idUser, $article);
+                if ($article == intval($a['idarticle']))
+                    return $this->updatePanier($idUser, $article,true,1);
             }
+        } else {
+            unset($articles[0]);
         }
-        $articles[] = [
+        array_push($articles,[
             'idarticle'=> $article,
             'qte'=> 1
-        ];
+        ]);
 
         $this->createQueryBuilder('p')
             ->update(Panier::class,'p')
             ->set('p.articles',':articles')
             ->where('p.utilisateur = :user')
-            ->setParameter('articles',json_encode($articles))
+            ->setParameter('articles',json_encode(array_values($articles)))
             ->setParameter('user',$idUser)
             ->getQuery()->getResult();
 
@@ -118,14 +121,14 @@ class PanierRepository extends ServiceEntityRepository
         $panierJ = array_values($panierJ);
         $key = array_search($article, array_column($panierJ, 'idarticle'));
         ($increment) ? $panierJ[$key]['qte'] = $panierJ[$key]['qte'] + $qte : $panierJ[$key]['qte'] = $panierJ[$key]['qte'] - $qte;
-
         if($reset) $panierJ[$key]['qte'] = (int) $qte;
+
 
         $this->createQueryBuilder('p')
             ->update(Panier::class,'p')
             ->set('p.articles',':articles')
             ->where('p.utilisateur = :user')
-            ->setParameter('articles',json_encode($panierJ))
+            ->setParameter('articles',json_encode(array_values($panierJ)))
             ->setParameter('user',$idUser)
             ->getQuery()->getResult();
 
@@ -143,7 +146,7 @@ class PanierRepository extends ServiceEntityRepository
             ->update(Panier::class,'p')
             ->set('p.articles',':articles')
             ->where('p.utilisateur = :user')
-            ->setParameter('articles',json_encode($panier))
+            ->setParameter('articles',json_encode(array_values($panier)))
             ->setParameter('user',$idUser)
             ->getQuery()->getResult();
 
