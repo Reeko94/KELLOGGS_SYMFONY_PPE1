@@ -14,12 +14,7 @@ final class Version20181206123443 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-
-        $this->addSql('ALTER TABLE compose DROP FOREIGN KEY FK_BFDD3168E9D518F8');
-        $this->addSql('ALTER TABLE compose DROP FOREIGN KEY FK_BFDD3168E9D518F9');
-        $this->addSql('DROP INDEX FK_BFDD3168E9D518F8 ON compose');
-        $this->addSql('DROP INDEX FK_BFDD3168E9D518F9 ON compose');
-        $this->addSql('ALTER TABLE compose ADD id_facture INT NOT NULL, ADD id_article INT NOT NULL, DROP idFacture, DROP idArticle, ADD PRIMARY KEY (id_facture, id_article)');
+        $this->addSql('ALTER TABLE compose ADD PRIMARY KEY (id_facture, id_article)');
     }
 
     public function down(Schema $schema) : void
