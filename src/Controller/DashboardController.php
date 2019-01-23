@@ -153,6 +153,7 @@ class DashboardController extends AbstractController
         $client->setActif(1);
         $client->setDateInscription(new \DateTime('now'));
         $client->setDateNaissance(new \DateTime('now'));
+        $client->setToken($commercial->getToken());
 
         $em->persist($client);
         $em->flush();
@@ -184,6 +185,7 @@ class DashboardController extends AbstractController
         $commercial->setActif(1);
         $commercial->setDateEntree(new \DateTime());
         $commercial->setPoste(' ');
+        $commercial->setToken($client->getToken());
 
         $em =$this->getDoctrine()->getManager();
         $em->persist($commercial);

@@ -58,6 +58,7 @@ class SecurityController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @Route("register",name="register")
+     * @throws \Exception
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -76,7 +77,7 @@ class SecurityController extends AbstractController
             $user->setDateInscription(new \DateTime('now'));
             $user->setType(1);
             $user->setActif(1);
-
+            $user->setToken(md5($user->getPassword()));
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

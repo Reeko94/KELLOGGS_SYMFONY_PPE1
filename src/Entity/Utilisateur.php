@@ -65,6 +65,11 @@ class Utilisateur implements UserInterface,\Serializable
      */
     private $actif;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $token;
+
     public function __construct()
     {
         $this->informationsLivraisons = new ArrayCollection();
@@ -279,6 +284,18 @@ class Utilisateur implements UserInterface,\Serializable
     public function setActif(int $actif): self
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }
