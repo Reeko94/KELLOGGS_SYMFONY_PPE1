@@ -23,7 +23,9 @@ class RegisterType extends AbstractType
             ))
             ->add('nom')
             ->add('prenom')
-            ->add('date_naissance',DateType::class)
+            ->add('date_naissance',DateType::class,[
+                'widget' => 'single_text'
+            ])
         ;
     }
 
