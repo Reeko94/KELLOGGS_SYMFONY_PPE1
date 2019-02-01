@@ -58,13 +58,15 @@ class UtilisateurRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param int $id
      * @return mixed
      */
-    public function deleteAfterUpdate()
+    public function deleteAfterUpdate(int $id)
     {
         return $this->createQueryBuilder('u')
             ->delete(Utilisateur::class,'u')
-            ->where('u.actif = 0')
+            ->where('u.id = :id')
+            ->setParameter('id', $id)
             ->getQuery()->getResult();
     }
 

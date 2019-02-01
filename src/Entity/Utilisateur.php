@@ -70,6 +70,11 @@ class Utilisateur implements UserInterface,\Serializable
      */
     private $token;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date_naissance;
+
     public function __construct()
     {
         $this->informationsLivraisons = new ArrayCollection();
@@ -296,6 +301,18 @@ class Utilisateur implements UserInterface,\Serializable
     public function setToken(string $token): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->date_naissance;
+    }
+
+    public function setDateNaissance(\DateTimeInterface $date_naissance): self
+    {
+        $this->date_naissance = $date_naissance;
 
         return $this;
     }

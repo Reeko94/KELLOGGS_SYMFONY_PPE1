@@ -9,32 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Commercial extends Utilisateur
 {
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $poste;
 
     /**
      * @ORM\Column(type="date")
      */
     private $date_entree;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $actif;
-
-    public function getPoste(): ?string
-    {
-        return $this->poste;
-    }
-
-    public function setPoste(string $poste): self
-    {
-        $this->poste = $poste;
-
-        return $this;
-    }
 
     public function getDateEntree(): ?\DateTimeInterface
     {

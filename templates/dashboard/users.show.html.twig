@@ -5,7 +5,7 @@
             <h1>{{ user.nom | upper }} {{ user.prenom | capitalize }}</h1>
             {% if user.type == 2 %}
             <em>Embauché le {{ user.getdateentree | date(' d/m/Y') }}</em>
-            <p class="font-weight-bold">{{ user.getposte }}</p>
+            <p class="font-weight-bold">Commercial</p>
             {% else %}
             <em>Client créer le {{ user.getdateinscription | date('d/m/Y') }}</em>
             {% endif %}
@@ -17,7 +17,9 @@
                         <th scope="col">ID</th>
                         <th scope="col">Adresse e-mail</th>
                         <th scope="col">Type de compte</th>
-                        <th scope="col">Actions</th>
+                        {% if user.email != app.user.getemail %}
+                            <th scope="col">Actions</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -37,10 +39,12 @@
                                     Promouvoir
                             </a>
                             {% else %}
+                                {% if user.email != app.user.getemail %}
                             <a href="{{ path('dashboard_user_demote',{id:user.id}) }}" class="text-white btn btn-danger">
                                     Retrograder
-                                {% endif %}
                             </a>
+                                {% endif %}
+                            {% endif %}
                         </td>
                     </tr>
                 </tbody>

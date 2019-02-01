@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Entity\Commercial;
+use App\Entity\Utilisateur;
 use App\Repository\ArticlesRepository;
 use App\Repository\ClientRepository;
 use App\Repository\CommercialRepository;
@@ -133,16 +134,17 @@ class DashboardController extends AbstractController
     /**
      * @Route("/user/{id}/demote",name="dashboard_user_demote")
      * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function demote(Request $request)
     {
         $this->isAdmin();
         $id = (int) $request->get('id');
-        $commercial = $this->commercialRepository->findOneBy(['id' => $id]);
+        $commercial = $this->utilisateurRepository->findOneBy(['id' => $id]);
         $this->commercialRepository->setInactif($id);
 
         $em = $this->getDoctrine()->getManager();
-
         $client = new Client();
         $client->setId($id);
         $client->setEmail($commercial->getEmail());
@@ -157,25 +159,25 @@ class DashboardController extends AbstractController
 
         $em->persist($client);
         $em->flush();
-        $this->deleteAfterUpdate();
+        $this->deleteAfterUpdate($id);
         return $this->redirectToRoute('dashboard_user',['id' => $client->getId()]);
     }
 
     /**
      * @param Request $request
-     * @Route("/user/{id}/promote",name="dashboard_user_promote")
+     * @param ClientRepository $clientRepository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Exception
+     * @Route("/user/{id}/promote",name="dashboard_user_promote")
      */
     public function promote(Request $request,ClientRepository $clientRepository)
     {
         $this->isAdmin();
         $id = (int) $request->get('id');
-        $client = $clientRepository->findOneBy(['id'=>$id]);
+        $client = $this->utilisateurRepository->findOneBy(['id'=>$id]);
         $this->clientRepository->setInactif($id);
 
         $commercial = new Commercial();
-        $commercial->setId($id);
         $commercial->setEmail($client->getEmail());
         $commercial->setPassword($client->getPassword());
         $commercial->setNom($client->getNom());
@@ -184,13 +186,13 @@ class DashboardController extends AbstractController
         $commercial->setDiscr('Commercial');
         $commercial->setActif(1);
         $commercial->setDateEntree(new \DateTime());
-        $commercial->setPoste(' ');
+        $commercial->setDateNaissance($client->getDateNaissance());
         $commercial->setToken($client->getToken());
 
         $em =$this->getDoctrine()->getManager();
         $em->persist($commercial);
         $em->flush();
-        $this->deleteAfterUpdate();
+        $this->deleteAfterUpdate($id);
         return $this->redirectToRoute('dashboard_user',['id'=>$commercial->getId()]);
     }
 
@@ -264,8 +266,8 @@ class DashboardController extends AbstractController
         return $this->redirectToRoute('dashboard_index');
     }
 
-    private function deleteAfterUpdate()
+    private function deleteAfterUpdate(int $id)
     {
-        return $this->utilisateurRepository->deleteAfterUpdate();
+        return $this->utilisateurRepository->deleteAfterUpdate($id);
     }
 }
