@@ -70,14 +70,15 @@ class SecurityController extends AbstractController
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $password = $form->getData()->getpassword();
+            $passwordCrypt = crypt($password,'$1$erXgIjX7');
             // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $user->setDateInscription(new \DateTime('now'));
             $user->setType(1);
             $user->setActif(1);
-            $user->setToken(md5($user->getPassword()));
+            $user->setToken($passwordCrypt);
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
