@@ -71,9 +71,9 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $form->getData()->getpassword();
-            $passwordCrypt = crypt($password,'$1$erXgIjX7');
+            $passwordCrypt = md5($password);
             // 3) Encode the password (you could also do this via Doctrine listener)
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $password = $passwordEncoder->encodePassword($user,$password);
             $user->setPassword($password);
             $user->setDateInscription(new \DateTime('now'));
             $user->setType(1);
