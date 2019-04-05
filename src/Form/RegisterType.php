@@ -18,9 +18,10 @@ class RegisterType extends AbstractType
             ->add('email')
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options'  => array('label' => 'mot de passe'),
+                'second_options' => array('label' => 'répéter le mot de passe'),
             ))
+
             ->add('nom')
             ->add('prenom')
             ->add('date_naissance',DateType::class,[
