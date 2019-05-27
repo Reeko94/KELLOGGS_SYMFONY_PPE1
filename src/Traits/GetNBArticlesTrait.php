@@ -32,10 +32,12 @@ trait GetNBArticlesTrait
     {
         if ($user = $this->getUser()) {
             $panier = $this->panierRepository->checkPanier($user);
-            if (count((array)json_decode($panier[0]->getArticles())[0]) == 0) {
-                return $this->redirectToRoute('home');
-            } else {
-                return count(json_decode($panier[0]->getArticles()));
+            if(count($panier) > 0) {
+                if (count((array)json_decode($panier[0]->getArticles())[0]) == 0) {
+                    return $this->redirectToRoute('home');
+                } else {
+                    return count(json_decode($panier[0]->getArticles()));
+                }
             }
         }
     }

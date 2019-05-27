@@ -89,11 +89,7 @@ class FabricantsRepository extends ServiceEntityRepository
     public function getAll()
     {
         return $this->createQueryBuilder('f')
-            ->select('f.id,f.libelle,f.logo,COUNT(a.id)')
-            ->from(Articles::class,'a')
-            ->where('a.disponibilite = 1')
-            ->andWhere('a.fabricant = f.id')
-            ->groupBy('f.id')
+            ->select('f.id,f.libelle,f.logo')
             ->getQuery()->getResult();
     }
 }
