@@ -28,7 +28,8 @@ class UserFixtures extends Fixture
         $client->setDateInscription(new \DateTime('now'));
         $client->setDateNaissance(new \DateTime('2000-11-14'));
         $client->setType(1);
-
+        $client->setActif(1);
+        $client->setDiscr('client');
         $manager->persist($client);
 
         $commercial = new Commercial();
@@ -37,9 +38,8 @@ class UserFixtures extends Fixture
         $commercial->setPassword($this->passwordEncoder->encodePassword($commercial, 'fedora'));
         $commercial->setEmail('brixton@brix.com');
         $commercial->setDateEntree(new \DateTime('now'));
-        $commercial->setPoste('PgM');
         $commercial->setType(2);
-
+        $commercial->setActif(1);
         $manager->persist($commercial);
 
         $manager->flush();
