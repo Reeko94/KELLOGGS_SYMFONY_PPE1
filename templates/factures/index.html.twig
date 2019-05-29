@@ -26,10 +26,10 @@
                     <div class="col-sm-6">
                         <h6 class="mb-3">Vers :</h6>
                         <div>
-                            <strong>{{ infosLivraison.utilisateur.nom }}  {{ infosLivraison.utilisateur.prenom }}</strong>
+                            <strong>{{ user.nom }}  {{ user.prenom }}</strong>
                         </div>
-                        <div>{{ infosLivraison.numero }} {{ infosLivraison.complement }} {{ infosLivraison.rue }}<br> {{ infosLivraison.codePostal }} {{ infosLivraison.ville }},<br> {{ infosLivraison.pays }}</div>
-                        <div>Email: {{ infosLivraison.utilisateur.email }}</div>
+                        <div>{{ infosLivraison.numero }} {{ infosLivraison.complement }} {{ infosLivraison.rue }}<br> {{ infosLivraison.codepostal }} {{ infosLivraison.ville }},<br> {{ infosLivraison.pays }}</div>
+                        <div>Email: {{ user.email }}</div>
                     </div>
 
 
@@ -46,15 +46,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% set prixttc = 0 %}
-                        {% for article,qte in articles %}
-                            {% set prixtotal = prix[article] * qte %}
-                            {% set prixttc = prixttc + prixtotal %}
+                        {% for article in articles %}
                         <tr>
-                            <td class="left strong">{{ article }}</td>
-                            <td class="right">{{ prix[article] }} €</td>
-                            <td class="center">{{ qte }}</td>
-                            <td class="right">{{ prixtotal }} €</td>
+                            <td class="left strong">{{ article.article.libelle }}</td>
+                            <td class="right">{{ article.article.prix }} €</td>
+                            <td class="center">{{ article.qte }}</td>
+                            <td class="right">{{ article.article.prix * article.qte }} €</td>
                         </tr>
                         {% endfor %}
                         </tbody>
@@ -72,20 +69,20 @@
                                 <td class="left">
                                     <strong>Prix HT</strong>
                                 </td>
-                                <td class="right"> {{ prixttc - (prixttc*0.2) | round(2,'floor') }} €</td>
+                                <td class="right"> {{ totalttc - (totalttc*0.2) | round(2,'floor') }} €</td>
                             </tr>
                             <tr>
                                 <td class="left">
                                     <strong>TVA</strong>
                                 </td>
-                                <td class="right">{{ prixttc * 0.2  | round(2,'floor') }} €</td>
+                                <td class="right">{{ totalttc * 0.2  | round(2,'floor') }} €</td>
                             </tr>
                             <tr>
                                 <td class="left">
                                     <strong>Prix TTC</strong>
                                 </td>
                                 <td class="right">
-                                    <strong>{{ prixttc | round(2,'floor') }} €</strong>
+                                    <strong>{{ totalttc | round(2,'floor') }} €</strong>
                                 </td>
                             </tr>
                             </tbody>

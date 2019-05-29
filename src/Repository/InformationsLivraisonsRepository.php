@@ -54,7 +54,7 @@ class InformationsLivraisonsRepository extends ServiceEntityRepository
             ->select('i.id,i.numero,i.complement,i.rue,i.codepostal,i.ville,i.pays')
             ->where('i.utilisateur = :user')
             ->setParameter('user',$user)
-            ->getQuery()->getResult();
+            ->getQuery()->getArrayResult();
     }
 
     public function updateInfosUser($getUser, array $datas)

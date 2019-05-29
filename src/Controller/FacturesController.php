@@ -10,6 +10,7 @@ use App\Repository\InformationsLivraisonsRepository;
 use App\Repository\InformationsPaiementsRepository;
 use App\Repository\PanierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FacturesController extends AbstractController
@@ -53,6 +54,7 @@ class FacturesController extends AbstractController
      * @param InformationsPaiementsRepository $informationsPaiementsRepository
      * @param ArticlesRepository $articlesRepository
      * @param ComposeRepository $composeRepository
+     * @param PanierRepository $panierRepository
      */
     public function __construct(FacturesRepository $factureRepository,
                                 InformationsLivraisonsRepository $informationsLivraisonsRepository,
@@ -70,22 +72,21 @@ class FacturesController extends AbstractController
 
     /**
      * @Route("/factures/{id}", name="factures")
-     * @param Factures $factures
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Factures $facture
+     * @return Response
      */
-    public function index(Factures $factures)
+    public function index(Factures $facture)
     {
-        $infosUser = $this->getUser();
-        $factureUser = $this->factureRepository->findBy(['client' => $infosUser,'id' => $factures->getId()])[0];
-        $infosLivraison = $this->informationsLivraisonsRepository->findBy(['utilisateur' => $infosUser])[0];
-        $composeArticle = $this->composeRepository->findBy(['id_facture' => $factures->getId()]);
-        $articlesFacture = [];
-        $prixArticle = [];
+        $user = $this->getUser();
+        $composeArticleInFacture = $this->composeRepository->findBy(['id_facture' => $facture->getId()]);
+        $livraison = $this->informationsLivraisonsRepository->getInfosByUser($user->getId())[0];
+        $totalttc = 0;
 
-        foreach ($composeArticle as $article => $value) {
-            //$articlesRepository->findby(['id_facture' => $value->getIdArticle()->getLibelle()])
-            $articlesFacture[$this->articlesRepository->find($value->getIdArticle())->getLibelle()] = $value->getQuantite();
-            $prixArticle[$this->articlesRepository->find($value->getIdArticle())->getLibelle()] = $this->articlesRepository->find($value->getIdArticle())->getPrix();
+        foreach ($composeArticleInFacture as $composeArticle) {
+            $articleInFacture = [];
+            $article = $this->articlesRepository->find($composeArticle->getIdArticle());
+            $articleInFacture[] = ["qte" => $composeArticle->getQuantite(),"article" => $article];
+            $totalttc += $composeArticle->getQuantite() * $article->getPrix();
         }
 
 
@@ -93,11 +94,12 @@ class FacturesController extends AbstractController
          * date_format($factureUser[0]->getDate(),'d/m/Y'));
         */
         return $this->render('factures/index.html.twig', [
-            'facture' => $factureUser,
-            'infosLivraison' => $infosLivraison,
-            'articles' => $articlesFacture,
-            'prix' => $prixArticle,
-            'nb' => $this->getNBArticle()
+            'facture' => $facture,
+            'user' => $user,
+            'infosLivraison' => $livraison,
+            'articles' => $articleInFacture,
+            'nb' => $this->getNBArticle(),
+            'totalttc' => $totalttc
         ]);
     }
 
