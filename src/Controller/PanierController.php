@@ -176,40 +176,42 @@ class PanierController extends AbstractController
 
     /**
      * @Route("/panier/submit",name="panier_to_facture")
-     * @param Request $request
      * @return RedirectResponse
      * @throws Exception
      */
-    public function panierToFacture(Request $request)
+    public function panierToFacture()
     {
-        //TODO: Ajouter le prix ttc dans l'entite facture
-        $panierjson = $this->panierRepository->checkPanier($this->getUser())[0];
-        $panierarray = json_decode($panierjson->getArticles());
-        $em = $this->getDoctrine()->getManager();
+        $panierjson = $this->panierRepository->checkPanier($this->getUser())[0]->getArticles();
+        $panierarray = json_decode($panierjson,true);
+        $totalttc = 0;
 
+        foreach ($panierarray as $article) {
+            $totalttc += $this->articleRepository->find($article['idArticle'])->getPrix() * $article['qte'];
+        }
+
+        $em = $this->getDoctrine()->getManager();
         $facture = new Factures();
         $facture->setClient($this->getUser());
         $date = new DateTime(date('Y-m-d',time()));
         $facture->setDate($date);
-        $facture->setTotalttc($request->get('totalttc'));
-
+        $facture->setTotalttc($totalttc);
 
         $em->persist($facture);
         $em->flush();
 
         $lastInsertID = $this->factureRepository->findBy(['client'=>$this->getUser()],['id'=>'DESC'],1)[0]->getId();
 
+
         foreach ($panierarray as $article) {
             $compose = new Compose();
             $compose->setIdFacture($lastInsertID);
-            $compose->setIdArticle($article->idarticle);
-            $compose->setQuantite($article->qte);
+            $compose->setIdArticle($article['idArticle']);
+            $compose->setQuantite($article['qte']);
             $em->persist($compose);
             $em->flush();
         }
 
-        $this->panierRepository->destroyPanier($this->getUser());
-        $this->addFlash('success','Panier payé avec succès');
+        $this->panierRepository->setPanier($this->getUser(),json_encode([new stdClass()]));
         return $this->redirect('/');
     }
 }

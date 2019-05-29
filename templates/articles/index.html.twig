@@ -17,7 +17,7 @@
                     <p class="card-text">
                     {% if app.user is not null and app.user.type > 1 %}
                         <a class="btn btn-success btn-block" href="{{ path('articles_edit',{id: article.id}) }}">Modifier</a>
-                    <form method="post" action="{{ path('fabricants_delete', {'id': article.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimer cet item?');">
+                    <form method="post" action="{{ path('articles_delete', {'id': article.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimer cet item?');">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
                         <button class="btn btn-danger btn-block">Supprimer</button>

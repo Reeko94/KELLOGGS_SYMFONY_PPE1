@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Articles;
 use App\Form\ArticlesType;
 use App\Repository\ArticlesRepository;
+use App\Repository\PanierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -22,6 +23,16 @@ class ArticlesController extends AbstractController
      * @var Filesystem
      */
     private $fileSystem;
+
+    /**
+     * @var PanierRepository
+     */
+    private $panierRepository;
+
+    public function __construct(PanierRepository $panierRepository)
+    {
+        $this->panierRepository = $panierRepository;
+    }
 
     private function generateUniqueFilename()
     {
@@ -71,6 +82,7 @@ class ArticlesController extends AbstractController
      * @param Request $request
      * @param Articles $article
      * @return Response
+     * @throws \Throwable
      */
     public function edit(Request $request, Articles $article): Response
     {
@@ -96,7 +108,7 @@ class ArticlesController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('home', ['id' => $article->getId()]);
+            return $this->redirectToRoute('fabricants_show', ['id' => $article->getFabricant()->getId()]);
         }
 
         return $this->render('articles/edit.html.twig', [
@@ -129,14 +141,30 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/{id}", name="articles_delete", methods="DELETE")
      * @param Request $request
-     * @param Articles $article
+     * @param Articles $a
      * @return Response
      */
-    public function delete(Request $request, Articles $article): Response
+    public function delete(Request $request, Articles $a): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$a->getId(), $request->request->get('_token'))) {
+            $paniers = $this->panierRepository->getAllPanier();
+            $newPaniers = [];
+            foreach ($paniers as $panier) {
+                $articles = json_decode($panier['articles'],true);
+                foreach ($articles as $article) {
+                    if($article['idArticle'] == $a->getId()) {
+                        $key = array_search($article, $articles);
+                        unset($articles[$key]);
+                    }
+                }
+                $tab = ["id" => $panier['id'], array_values($articles)];
+                $newPaniers[] = $tab;
+            }
+            foreach ($newPaniers as $newPanier) {
+                $this->panierRepository->updatePanierWithId(json_encode($newPanier[0]),intval($newPanier['id']));
+            }
             $em = $this->getDoctrine()->getManager();
-            $em->remove($article);
+            $em->remove($a);
             $em->flush();
         }
 

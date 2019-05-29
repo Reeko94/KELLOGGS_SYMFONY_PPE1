@@ -18,6 +18,7 @@ class CheckExtension extends AbstractExtension
             // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
             new TwigFilter('client', [$this, 'isClient']),
             new TwigFilter('int',[$this,'isInteger']),
+            new TwigFilter('supzero', [$this, 'supZero']),
         ];
     }
 
@@ -26,6 +27,11 @@ class CheckExtension extends AbstractExtension
         return [
             new TwigFunction('function_name', [$this, 'doSomething']),
         ];
+    }
+
+    public function supZero($value)
+    {
+        return $value > 0;
     }
 
     public function isInteger($value)

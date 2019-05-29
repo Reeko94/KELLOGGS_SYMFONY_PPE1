@@ -33,6 +33,13 @@ class FabricantsController extends AbstractController
      */
     private $panierRepository;
 
+
+    public function __construct(Filesystem $fileSystem,PanierRepository $panierRepository)
+    {
+        $this->fileSystem = $fileSystem;
+        $this->panierRepository = $panierRepository;
+    }
+
     /**
      * @Route("/", name="fabricants_index", methods="GET")
      * @param FabricantsRepository $fabricantsRepository
@@ -117,6 +124,7 @@ class FabricantsController extends AbstractController
      * @param Request $request
      * @param Fabricants $fabricant
      * @return Response
+     * @throws \Throwable
      */
     public function edit(Request $request, Fabricants $fabricant): Response
     {
@@ -158,6 +166,7 @@ class FabricantsController extends AbstractController
      * @param Request $request
      * @param Fabricants $fabricant
      * @return Response
+     * @throws \Throwable
      */
     public function delete(Request $request, Fabricants $fabricant): Response
     {
