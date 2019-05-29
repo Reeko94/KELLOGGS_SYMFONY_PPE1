@@ -10,14 +10,19 @@ use App\Repository\InformationsLivraisonsRepository;
 use App\Repository\InformationsPaiementsRepository;
 use App\Repository\PanierRepository;
 use App\Repository\UtilisateurRepository;
+use App\Traits\GetNBArticlesTrait;
+use DateTime;
+use Exception;
+use stdClass;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PanierController extends AbstractController
 {
-    use \App\Traits\GetNBArticlesTrait;
+    use GetNBArticlesTrait;
 
     /**
      * @var ArticlesRepository
@@ -51,6 +56,15 @@ class PanierController extends AbstractController
      */
     private $factureRepository;
 
+    /**
+     * PanierController constructor.
+     * @param UtilisateurRepository $utilisateurRepository
+     * @param PanierRepository $panierRepository
+     * @param ArticlesRepository $articleRepository
+     * @param InformationsLivraisonsRepository $informationsLivraisonsRepository
+     * @param InformationsPaiementsRepository $informationsPaiementsRepository
+     * @param FacturesRepository $factureRepository
+     */
     public function __construct(UtilisateurRepository $utilisateurRepository,PanierRepository $panierRepository,ArticlesRepository $articleRepository,InformationsLivraisonsRepository $informationsLivraisonsRepository,InformationsPaiementsRepository $informationsPaiementsRepository,FacturesRepository $factureRepository)
     {
         $this->utilisateurRepository = $utilisateurRepository;
@@ -69,68 +83,91 @@ class PanierController extends AbstractController
         if(!$this->getUser())
             return $this->redirectToRoute('home');
 
-        $panier = $this->panierRepository->checkPanier($this->getUser())[0]->getArticles();
 
-        $articles = json_decode($panier,true);
-        $articles = array_values($articles);
+
+        $panier = $this->panierRepository->checkPanier($this->getUser());
+
+        $articles = json_decode($panier[0]->getArticles(),true);
+        $articlesWithDetails = [];
         $sum = 0;
-        if(!empty($articles[0])) {
-            foreach ($articles as $key => $value) {
-                array_push($articles[$key],$this->articleRepository->findBy(['id' => $value['idarticle']])[0]);
-                $sum += $this->articleRepository->findBy(['id' => $value['idarticle']])[0]->getPrix() * $value['qte'];
+
+        if(count($articles[0]) > 1) {
+
+            foreach ($articles as $article) {
+                $articleInBDD = $this->articleRepository->find($article['idArticle']);
+                $article['urlMedia'] = $articleInBDD->getUrlMedia();
+                $article['libelle'] = $articleInBDD->getLibelle();
+                $article['prix'] = $articleInBDD->getPrix();
+                $articlesWithDetails[] = $article;
+                $sum += $articleInBDD->getPrix() * $article['qte'];
             }
+
+            return $this->render('panier/index.html.twig', [
+                'nb' => $this->getNBArticle(),
+                'articles' => $articlesWithDetails,
+                'controller_name' => 'PanierController',
+                'sum' => $sum,
+                'user' => $this->getUser(),
+                'infosPaiement' => $this->infosPaiementsRepository->getInfosByUser($this->getUser()),
+                'infosLivraison' => $this->infosLivraisonsRepository->getInfosByUser($this->getUser())
+            ]);
+        } else {
+            return $this->redirectToRoute('home');
         }
-
-        if(count($articles[0]) === 0)
-            $articles = 0;
-
-        return $this->render('panier/index.html.twig', [
-            'nb' => $this->getNBArticle(),
-            'infosarticles' => $articles,
-            'controller_name' => 'PanierController',
-            'user' => $this->getUser(),
-            'sum' => $sum,
-            'infosPaiement' => $this->infosPaiementsRepository->getInfosByUser($this->getUser()),
-            'infosLivraison' => $this->infosLivraisonsRepository->getInfosByUser($this->getUser())
-        ]);
     }
 
     /**
      * @Route("/panier/delete", name="deletearticlepanier")
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function deleteArticlePanier(Request $request)
     {
-        $redirect = false;
         $panier = $this->panierRepository->checkPanier($this->getUser())[0]->getArticles();
         $articles = json_decode($panier,true);
+
         foreach ($articles as $article){
-            if($article['idarticle'] == $request->get('id'))
+            if($article['idArticle'] == $request->get('id'))
                 unset($articles[(array_keys($articles,$article)[0])]);
         }
 
         if(sizeof($articles) == 0) {
-            $articles = [new \stdClass()];
-            $redirect = true;
+            $articles = [new stdClass()];
         }
 
-        $this->panierRepository->setPanier($this->getUser(),$articles);
-        $route = ($redirect) ?  'home' : 'panier';
 
-        return $this->redirectToRoute($route);
+        $this->panierRepository->setPanier($this->getUser(),json_encode($articles));
+
+        return $this->redirectToRoute('panier');
     }
 
     /**
      * @param Request $request
      * @Route("/panier/update",name="updatepanier",methods="POST")
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function updatePanier(Request $request)
     {
         if ($user = $this->getUser()) {
             try {
-                $this->panierRepository->updatePanier($user, intval($request->get('id')), true, $request->get('qte'),true);
+
+                $panier  = $this->panierRepository->checkPanier($this->getUser()->getId());
+                $idArticle = intval($request->get('id'));
+                $panierArray = json_decode($panier[0]->getArticles(),true);
+
+                $newPanier = [];
+                foreach ($panierArray as $article) {
+                    if($article['idArticle'] == $idArticle) {
+                        $article['qte'] = intval($request->get('qte'));
+                    }
+                    array_push($newPanier,$article);
+                }
+                $JSONPanier = json_encode($newPanier);
+
+
+                $this->panierRepository->updatePanier($user, $JSONPanier);
                 $this->addFlash('success', 'Article ajouté au panier avec succès');
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 self::addFlash('error', 'Une erreur est survenue lors de l\'ajout au panier');
             }
             return $this->redirectToRoute('panier');
@@ -139,7 +176,9 @@ class PanierController extends AbstractController
 
     /**
      * @Route("/panier/submit",name="panier_to_facture")
-     * @throws \Exception
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function panierToFacture(Request $request)
     {
@@ -150,7 +189,7 @@ class PanierController extends AbstractController
 
         $facture = new Factures();
         $facture->setClient($this->getUser());
-        $date = new \DateTime(date('Y-m-d',time()));
+        $date = new DateTime(date('Y-m-d',time()));
         $facture->setDate($date);
         $facture->setTotalttc($request->get('totalttc'));
 

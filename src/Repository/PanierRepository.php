@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Panier;
+use App\Entity\Utilisateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -71,64 +72,33 @@ class PanierRepository extends ServiceEntityRepository
 
     /**
      * @param $idUser
-     * @param $article
+     * @param $jsonPanier
      * @return bool
      */
-    public function addArticlePanier($idUser,$article)
+    public function addArticlePanier($idUser,$jsonPanier)
     {
-        //TODO : dynamisme sur la quantité ?
-        $panier = $this->checkPanier($idUser);
-        $countPanier = (count((array)json_decode($panier[0]->getArticles())[0]));
-        $articles = json_decode($panier[0]->getArticles(),true);
-        $articles = array_values($articles);
-        // S'il y a au moins un article
-        if($countPanier >= 1){
-            foreach($articles as $a) {
-                if ($article == intval($a['idarticle']))
-                    return $this->updatePanier($idUser, $article,true,1);
-            }
-        } else {
-            unset($articles[0]);
-        }
-        array_push($articles,[
-            'idarticle'=> $article,
-            'qte'=> 1
-        ]);
-
         $this->createQueryBuilder('p')
             ->update(Panier::class,'p')
             ->set('p.articles',':articles')
             ->where('p.utilisateur = :user')
-            ->setParameter('articles',json_encode(array_values($articles)))
+            ->setParameter('articles',$jsonPanier)
             ->setParameter('user',$idUser)
             ->getQuery()->getResult();
-
         return true;
     }
 
     /**
-     * @param $idUser
-     * @param $article
-     * @param bool $increment
-     * @param int $qte
-     * @param bool $reset
+     * @param integer $idUser
+     * @param string $jsonPanier
      * @return bool
      */
-    public function updatePanier($idUser,$article,$increment = true,$qte = 0,$reset = false)
+    public function updatePanier(Utilisateur $idUser,string $jsonPanier)
     {
-        $panier = $this->checkPanier($idUser);
-        $panierJ = json_decode($panier[0]->getArticles(),true);
-        $panierJ = array_values($panierJ);
-        $key = array_search($article, array_column($panierJ, 'idarticle'));
-        ($increment) ? $panierJ[$key]['qte'] = $panierJ[$key]['qte'] + $qte : $panierJ[$key]['qte'] = $panierJ[$key]['qte'] - $qte;
-        if($reset) $panierJ[$key]['qte'] = (int) $qte;
-
-
         $this->createQueryBuilder('p')
             ->update(Panier::class,'p')
             ->set('p.articles',':articles')
             ->where('p.utilisateur = :user')
-            ->setParameter('articles',json_encode(array_values($panierJ)))
+            ->setParameter('articles',$jsonPanier)
             ->setParameter('user',$idUser)
             ->getQuery()->getResult();
 
@@ -146,7 +116,7 @@ class PanierRepository extends ServiceEntityRepository
             ->update(Panier::class,'p')
             ->set('p.articles',':articles')
             ->where('p.utilisateur = :user')
-            ->setParameter('articles',json_encode(array_values($panier)))
+            ->setParameter('articles',$panier)
             ->setParameter('user',$idUser)
             ->getQuery()->getResult();
 
@@ -170,7 +140,11 @@ class PanierRepository extends ServiceEntityRepository
             ->getQuery()->getResult();
     }
 
-    // deletearticleforpanier
+    /**
+     * @param $articles
+     * @param int $idPanier
+     * @return mixed
+     */
     public function updatePanierWithId($articles, int $idPanier)
     {
         return $this->createQueryBuilder('p')

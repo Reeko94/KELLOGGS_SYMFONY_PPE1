@@ -23,21 +23,30 @@ trait GetNBArticlesTrait
      */
     private $panierRepository;
 
+    /**
+     * GetNBArticlesTrait constructor.
+     * @param PanierRepository $panierRepository
+     */
     public function __construct(PanierRepository $panierRepository)
     {
         $this->panierRepository = $panierRepository;
     }
 
+    /**
+     * @return int
+     */
     public function getNBArticle()
     {
-        if ($user = $this->getUser()) {
+        if($user = $this->getUser()) {
             $panier = $this->panierRepository->checkPanier($user);
-            if(count($panier) > 0) {
-                if (count((array)json_decode($panier[0]->getArticles())[0]) == 0) {
-                    return $this->redirectToRoute('home');
-                } else {
-                    return count(json_decode($panier[0]->getArticles()));
-                }
+            if(count($panier) === 0) {
+                // Panier non créer en base
+                return 0;
+            } else {
+                $panierUser = $panier[0];
+                $articlesPanierJSON = $panierUser->getArticles();
+                $articlesPanierArray = json_decode($articlesPanierJSON,true);
+                return (isset($articlesPanierArray[0]['idArticle'])) ? count($articlesPanierArray) : 0;
             }
         }
     }

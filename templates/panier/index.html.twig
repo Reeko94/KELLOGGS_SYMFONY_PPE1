@@ -70,30 +70,30 @@
             </tr>
             </thead>
             <tbody>
-            {% for article in infosarticles %}
+            {% for article in articles %}
                 <tr>
                     <td>
                         <figure class="media">
-                            <div class="img-wrap"><img src="/uploads/article/{{ article.0.urlMedia }}" class="img-thumbnail img-sm"></div>
+                            <div class="img-wrap"><img src="/uploads/article/{{ article.urlMedia }}" class="img-thumbnail img-sm"></div>
                             <figcaption class="media-body">
-                                <h6 class="title text-truncate">{{ article.0.libelle }}</h6>
+                                <h6 class="title text-truncate">{{ article.libelle }}</h6>
                             </figcaption>
                         </figure>
                     </td>
                     <td>
                         <form action="{{ path('updatepanier') }}" method="post">
-                            <input type="hidden" name="id" value="{{ article.0.id }}">
+                            <input type="hidden" name="id" value="{{ article.idArticle }}">
                             <input type="number" name="qte" value="{{ article.qte }}" class="form-control">
                             <button class="btn btn-success mt-1" type="submit" name="add">Mettre à jour</button>
                         </form>
                     </td>
                     <td>
                         <div class="price-wrap">
-                            <p class="price">{{ article.qte * article.0.prix }} €</p>
+                            <p class="price">{{ article.qte * article.prix }} €</p>
                         </div> <!-- price-wrap .// -->
                     </td>
                     <td class="text-right">
-                        <a href="{{ path('deletearticlepanier', {'id': article.idarticle}) }}" class="btn btn-danger btn-round"> &times; Supprimer</a>
+                        <a href="{{ path('deletearticlepanier', {'id': article.idArticle }) }}" class="btn btn-danger btn-round"> &times; Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -105,7 +105,7 @@
             </tbody>
         </table>
 
-        {% if(infosarticles |length > 0) %}
+        {% if(articles |length > 0) %}
             <button type="button" class="btn mb-2 btn-success" id="validate">Valider le panier</button>
         {% else %}
             <h1 class="text-center">

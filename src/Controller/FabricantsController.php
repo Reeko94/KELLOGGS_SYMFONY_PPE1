@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Articles;
 use App\Entity\Fabricants;
+use App\Entity\Panier;
 use App\Form\FabricantsType;
 use App\Repository\ArticlesRepository;
 use App\Repository\FabricantsRepository;
@@ -99,8 +100,7 @@ class FabricantsController extends AbstractController
      */
     public function show(Fabricants $fabricant,ArticlesRepository $articles): Response
     {
-        $user = $this->getUser();
-        if($user->getType() == 2) {
+        if($this->getUser() && $this->getUser()->getType() == 2) {
             $articlesByFabricant = $articles->findBy(['fabricant' => $fabricant->getId()]);
         } else {
             $articlesByFabricant = $articles->findBy(['fabricant' => $fabricant->getId(), 'disponibilite' => 1]);
@@ -174,15 +174,52 @@ class FabricantsController extends AbstractController
 
     /**
      * @Route("/add",name="addpanier",methods="POST")
+     * @param Request $request
+     * @return Response
      */
-    public function addpanier(Request $request) : Response
+    public function addOanier(Request $request) : Response
     {
-        if($user = $this->getUser())
-        {
-            $referer = substr($referer = $request->headers->get('referer'),-1);
-            $this->panierRepository->addArticlePanier($user,intval($request->get('id')));
-            $this->addFlash('success','Article ajouté au panier avec succès');
-            return $this->redirectToRoute('fabricants_show',['id' => $referer]);
+        $panier  = $this->panierRepository->checkPanier($this->getUser());
+        $idArticle = intval($request->get('id'));
+
+        $panierUser = $panier[0];
+        $articlesPanierJSON = $panierUser->getArticles();
+        $articlesPanierArray = json_decode($articlesPanierJSON,true);
+
+        $nbArticles = (isset($articlesPanierArray[0]['idArticle'])) ? count($articlesPanierArray) : 0;
+
+
+        if($nbArticles === 0) {
+            $articlesPanierArray[0] = ['idArticle' => $idArticle,'qte' => 1];
+            $jsonPanier = json_encode($articlesPanierArray);
+        } else {
+            $panierArray = json_decode($panier[0]->getArticles());
+            $article = null;
+
+            foreach ($panierArray as $a) {
+                if($a->idArticle === $idArticle) {
+                    $article = $a;
+                    break;
+                }
+            }
+
+            if($article === null) {
+                // Article non trouvé
+                $std = new \stdClass();
+                $std->idArticle = $idArticle;
+                $std->qte = 1;
+                array_push($panierArray,$std);
+            } else {
+                $article->qte++;
+            }
+            $jsonPanier = json_encode($panierArray);
         }
+
+        $this->panierRepository->addArticlePanier($this->getUser()->getId(),$jsonPanier);
+
+
+        $referer = substr($referer = $request->headers->get('referer'),-1);
+        return $this->redirectToRoute('fabricants_show',['id' => $referer]);
+
     }
 }

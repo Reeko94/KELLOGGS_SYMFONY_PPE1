@@ -30,6 +30,8 @@ class ArticlesController extends AbstractController
 
     /**
      * @Route("/new", name="articles_new", methods="GET|POST")
+     * @param Request $request
+     * @return Response
      */
 
     public function new(Request $request): Response
@@ -106,6 +108,8 @@ class ArticlesController extends AbstractController
 
     /**
      * @Route("/{id}", name="articles_show", methods="GET")
+     * @param Articles $article
+     * @return Response
      */
     public function show(Articles $article): Response
     {
@@ -114,6 +118,8 @@ class ArticlesController extends AbstractController
 
     /**
      * @Route("/", name="articles_index", methods="GET")
+     * @param ArticlesRepository $articlesRepository
+     * @return Response
      */
     public function index(ArticlesRepository $articlesRepository): Response
     {
@@ -122,6 +128,9 @@ class ArticlesController extends AbstractController
 
     /**
      * @Route("/{id}", name="articles_delete", methods="DELETE")
+     * @param Request $request
+     * @param Articles $article
+     * @return Response
      */
     public function delete(Request $request, Articles $article): Response
     {
