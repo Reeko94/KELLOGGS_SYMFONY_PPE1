@@ -99,8 +99,12 @@ class FabricantsController extends AbstractController
      */
     public function show(Fabricants $fabricant,ArticlesRepository $articles): Response
     {
-
-        $articlesByFabricant = $articles->findBy(['fabricant' => $fabricant->getId(),'disponibilite' => 1]);
+        $user = $this->getUser();
+        if($user->getType() == 2) {
+            $articlesByFabricant = $articles->findBy(['fabricant' => $fabricant->getId()]);
+        } else {
+            $articlesByFabricant = $articles->findBy(['fabricant' => $fabricant->getId(), 'disponibilite' => 1]);
+        }
         return $this->render('fabricants/show.html.twig', [
             'fabricant' => $fabricant,
             'articles' => $articlesByFabricant,
