@@ -126,7 +126,7 @@
                         <option value="{{ infosLivraison.0.id }}">{{ infosLivraison.0.numero }} {{ infosLivraison.0.complement }} {{ infosLivraison.0.rue }}, {{ infosLivraison.0.codepostal }} {{ infosLivraison.0.ville | upper }} </option>
                     </select>
                         {% else %}
-                            TODO LINK TO PROFILE PAGE FOR ADD INFO
+                            <a href="{{ path('profil') }}">Ajouter mes informations de livraisons</a>
                     {% endif %}
                 </div>
                 <div class="form-group">
@@ -136,12 +136,14 @@
                         <option value="{{ infosPaiement.0.id }}">{{ infosPaiement.0.nom }} {{ infosPaiement.0.prenom }} -- {{ infosPaiement.0.numero }}</option>
                     </select>
                     {% else %}
-                    TODO LINK TO PROFILE PAGE FOR ADD INFO
+                        <a href="{{ path('profil') }}">Ajouter mes informations de paiement</a>
                     {% endif %}
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="totalttc" value="{{ sum }}">
+                    {% if infosPaiement is not empty or infosLivraison is not empty %}
                     <button type="submit" class="btn btn-success btn-lg btn-block">Payer</button>
+                    {% endif %}
                 </div>
             </form>
         </div>
