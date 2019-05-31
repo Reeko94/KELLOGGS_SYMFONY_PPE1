@@ -29,12 +29,26 @@ class ArticlesController extends AbstractController
      */
     private $panierRepository;
 
-    public function __construct(PanierRepository $panierRepository)
+    /**
+     * @var ArticlesRepository
+     */
+    private $articlesRepository;
+
+    /**
+     * ArticlesController constructor.
+     * @param PanierRepository $panierRepository
+     * @param ArticlesRepository $articlesRepository
+     */
+    public function __construct(PanierRepository $panierRepository, ArticlesRepository $articlesRepository)
     {
+        $this->articlesRepository = $articlesRepository;
         $this->panierRepository = $panierRepository;
     }
 
-    private function generateUniqueFilename()
+    /**
+     * @return string
+     */
+    private function generateUniqueFilename() : string
     {
         return md5(uniqid());
     }
@@ -130,12 +144,11 @@ class ArticlesController extends AbstractController
 
     /**
      * @Route("/", name="articles_index", methods="GET")
-     * @param ArticlesRepository $articlesRepository
      * @return Response
      */
-    public function index(ArticlesRepository $articlesRepository): Response
+    public function index(): Response
     {
-        return $this->render('articles/index.html.twig', ['articles' => $articlesRepository->findAll(),'nb'=>$this->getNBArticle()]);
+        return $this->render('articles/index.html.twig', ['articles' => $this->articlesRepository->findAll(),'nb'=>$this->getNBArticle()]);
     }
 
     /**

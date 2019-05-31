@@ -43,6 +43,7 @@ class FabricantsController extends AbstractController
     /**
      * @Route("/", name="fabricants_index", methods="GET")
      * @param FabricantsRepository $fabricantsRepository
+     * @param ArticlesRepository $articlesRepository
      * @return Response
      */
     public function index(FabricantsRepository $fabricantsRepository,ArticlesRepository $articlesRepository): Response

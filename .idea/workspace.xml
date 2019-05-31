@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c992e45b-e899-4493-a28e-c21be4d61451" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/efbb981d-145b-462b-8d91-7fa908fdc3f3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ArticlesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ArticlesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/FabricantsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FabricantsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/FacturesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FacturesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PanierController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PanierController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ArticlesRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ArticlesRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/FabricantsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/FabricantsRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/PanierRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PanierRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/fabricants/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/fabricants/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/fabricants/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/fabricants/show.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +21,9 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -37,74 +39,18 @@
     <expand>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="kelloggs@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="Debian" type="feb32156:DbDataSourceImpl" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="kelloggs@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="Debian" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="kelloggs@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="Debian" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="kelloggs: schema" type="76f4a085:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="kelloggs@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="kelloggs: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="articles: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="kelloggs@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="kelloggs: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="client: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="kelloggs@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="kelloggs: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="commercial: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="kelloggs@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="kelloggs: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="fabricants: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="kelloggs@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="kelloggs: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="factures: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="kelloggs@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="kelloggs: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="informations_paiements: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="kelloggs@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="kelloggs: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="panier: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="kelloggs@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="kelloggs: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="utilisateur: table" type="285a2a93:MysqlImplModel$Table" />
+        <item name="kelloggs: schema" type="ebfa3cd1:MariaImplModel$Schema" />
       </path>
     </expand>
     <select />
@@ -113,12 +59,12 @@
     <favorites_list name="KELLOGGS" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/PanierController.php">
+        <entry file="file://$PROJECT_DIR$/templates/fabricants/show.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="168" column="35" selection-start-line="168" selection-start-column="35" selection-end-line="168" selection-end-column="35" />
+            <state relative-caret-position="180">
+              <caret line="12" column="92" selection-start-line="12" selection-start-column="92" selection-end-line="12" selection-end-column="92" />
             </state>
           </provider>
         </entry>
@@ -127,19 +73,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>email</find>
-      <find>getPassword</find>
-      <find>getPre</find>
-      <find>role</find>
-      <find>ingr</find>
-      <find>fileSystem</find>
-      <find>logo</find>
-      <find>remove</find>
-      <find>prefer</find>
-      <find>require</find>
-      <find>dd</find>
-      <find>datei</find>
-      <find>datena</find>
       <find>$this-&gt;panierRepository-&gt;del</find>
       <find>fabricants/ad</find>
       <find>fabri</find>
@@ -150,13 +83,26 @@
       <find>\std</find>
       <find>std</find>
       <find>update</find>
-      <find>dd(</find>
       <find>set</find>
       <find>f</find>
       <find>new</find>
       <find>get</find>
       <find>getl</find>
       <find>fileS</find>
+      <find>updatePa</find>
+      <find>updatePanier</find>
+      <find>info</find>
+      <find>infosPa</find>
+      <find>index</find>
+      <find>redirect</find>
+      <find>d</find>
+      <find>dd(</find>
+      <find>add</find>
+      <find>remove</find>
+      <find>checkPa</find>
+      <find>array_</find>
+      <find>prix</find>
+      <find>repository</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;input type=&quot;text&quot;</replace>
@@ -169,12 +115,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Entity/Ingredients.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Compose.php" />
-        <option value="$PROJECT_DIR$/config/services.yaml" />
-        <option value="$PROJECT_DIR$/src/Form/MediasType.php" />
-        <option value="$PROJECT_DIR$/src/Migrations/Version20181214092228.php" />
-        <option value="$PROJECT_DIR$/src/Migrations/Version20181214144138.php" />
         <option value="$PROJECT_DIR$/templates/profil/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/NouveautesController.php" />
         <option value="$PROJECT_DIR$/templates/nouveautes/index.html.twig" />
@@ -184,9 +124,6 @@
         <option value="$PROJECT_DIR$/src/Migrations/Version20181216132141.php" />
         <option value="$PROJECT_DIR$/templates/dashboard/articles.index.html.twig" />
         <option value="$PROJECT_DIR$/composer.json" />
-        <option value="$PROJECT_DIR$/src/Twig/CheckExtension.php" />
-        <option value="$PROJECT_DIR$/templates/base.html.twig" />
-        <option value="$PROJECT_DIR$/templates/panier/index.html.twig" />
         <option value="$PROJECT_DIR$/templates/dashboard/users.index.html.twig" />
         <option value="$PROJECT_DIR$/src/Migrations/Version20181218091734.php" />
         <option value="$PROJECT_DIR$/src/Repository/ClientRepository.php" />
@@ -200,26 +137,35 @@
         <option value="$PROJECT_DIR$/src/Repository/UtilisateurRepository.php" />
         <option value="$PROJECT_DIR$/templates/articles/edit.html.twig" />
         <option value="$PROJECT_DIR$/templates/admin.base.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/ArticlesController.php" />
-        <option value="$PROJECT_DIR$/templates/articles/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/ArticlesType.php" />
         <option value="$PROJECT_DIR$/templates/articles/_form.html.twig" />
         <option value="$PROJECT_DIR$/templates/articles/new.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/ProfilController.php" />
-        <option value="$PROJECT_DIR$/src/Traits/GetNBArticlesTrait.php" />
-        <option value="$PROJECT_DIR$/templates/fabricants/show.html.twig" />
         <option value="$PROJECT_DIR$/templates/dashboard/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/SecurityController.php" />
-        <option value="$USER_HOME$/Desktop/kelloggs (1).sql" />
-        <option value="$USER_HOME$/Desktop/kelloggs (2).sql" />
+        <option value="$PROJECT_DIR$/../kelloggs (1).sql" />
+        <option value="$PROJECT_DIR$/../kelloggs (2).sql" />
         <option value="$PROJECT_DIR$/src/Repository/ArticlesRepository.php" />
-        <option value="$PROJECT_DIR$/src/Controller/FabricantsController.php" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
+        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/Repository/FabricantsRepository.php" />
-        <option value="$PROJECT_DIR$/templates/fabricants/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/FacturesController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/PanierController.php" />
+        <option value="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" />
+        <option value="$PROJECT_DIR$/templates/panier/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Traits/GetNBArticlesTrait.php" />
+        <option value="$PROJECT_DIR$/vendor/symfony/filesystem/Filesystem.php" />
+        <option value="$PROJECT_DIR$/templates/articles/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Twig/CheckExtension.php" />
+        <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/src/Repository/PanierRepository.php" />
+        <option value="$PROJECT_DIR$/src/Controller/PanierController.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Factures.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
+        <option value="$PROJECT_DIR$/src/Repository/InformationsLivraisonsRepository.php" />
+        <option value="$PROJECT_DIR$/src/Controller/FacturesController.php" />
+        <option value="$PROJECT_DIR$/templates/factures/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/ArticlesController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/FabricantsController.php" />
+        <option value="$PROJECT_DIR$/templates/fabricants/index.html.twig" />
+        <option value="$PROJECT_DIR$/templates/fabricants/show.html.twig" />
       </list>
     </option>
   </component>
@@ -334,7 +280,7 @@
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-diactoros" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -344,33 +290,54 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="KELLOGGS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KELLOGGS" type="462c0819:PsiDirectoryNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="KELLOGGS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KELLOGGS" type="462c0819:PsiDirectoryNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="uploads" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="KELLOGGS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KELLOGGS" type="462c0819:PsiDirectoryNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="KELLOGGS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KELLOGGS" type="462c0819:PsiDirectoryNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="KELLOGGS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="KELLOGGS" type="462c0819:PsiDirectoryNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KELLOGGS_SYMFONY_PPE_1" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="fabricants" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -378,13 +345,16 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DatabaseDriversLRU" value="mysql&#10;mariadb" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="DateTy&#9;null&#9;null&#10;logi&#9;FILE&#9;file:///Library/WebServer/Documents/KELLOGGS/templates/security/login.html.twig&#10;secur&#9;FILE&#9;file:///Library/WebServer/Documents/KELLOGGS/config/packages/security.yaml&#10;Perso&#9;FILE&#9;file:///Library/WebServer/Documents/KELLOGGS/src/Entity/Personne.php" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -408,6 +378,12 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="phpunit.xml.dist" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -428,24 +404,39 @@
       <workItem from="1545309355069" duration="1397000" />
       <workItem from="1545317081662" duration="466000" />
       <workItem from="1545321743250" duration="1199000" />
+      <workItem from="1558972211793" duration="2646000" />
+      <workItem from="1558995836442" duration="353000" />
+      <workItem from="1559075125230" duration="2192000" />
+      <workItem from="1559077738794" duration="13031000" />
+      <workItem from="1559213536180" duration="2176000" />
+      <workItem from="1559290958787" duration="1537000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71537000" />
+    <option name="totallyTimeSpent" value="93472000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" sideWeight="0.5016077" side_tool="true" weight="0.20225511" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49839228" visible="true" weight="0.25965664" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49839228" visible="true" weight="0.21988389" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Console" order="0" weight="0.32961586" />
-      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" weight="0.27108434" />
-      <window_info anchor="bottom" id="Database Changes" order="2" weight="0.32975206" />
+      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" weight="0.270202" />
+      <window_info anchor="bottom" id="Database Changes" order="2" show_stripe_button="false" weight="0.32975206" />
       <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.5007153" side_tool="true" weight="0.25060242" />
-      <window_info anchor="bottom" id="Version Control" order="4" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="4" />
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" />
@@ -453,9 +444,9 @@
       <window_info anchor="bottom" id="Debug" order="9" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="bottom" id="TODO" order="12" weight="0.32929292" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32961586" />
-      <window_info anchor="right" id="Database" order="0" weight="0.20100144" />
+      <window_info anchor="right" id="Database" order="0" visible="true" weight="0.20029028" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
@@ -465,307 +456,337 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Entity/Commercial.php">
+    <entry file="file://$PROJECT_DIR$/src/Repository/NouveautesRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Client.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20181218093401.php" />
-    <entry file="file://$PROJECT_DIR$/src/Repository/CommercialRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="28" column="38" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/dashboard/users.show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/articles/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+        <state relative-caret-position="180">
+          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/UtilisateurRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="52" column="37" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
+        <state relative-caret-position="615">
+          <caret line="44" column="5" lean-forward="true" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/ClientRepository.php">
+    <entry file="file://$PROJECT_DIR$/src/Repository/MediasRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="58" selection-start-line="55" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin.base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="138" column="36" selection-start-line="138" selection-start-column="36" selection-end-line="138" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/ArticlesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="119" column="63" selection-start-line="119" selection-start-column="63" selection-end-line="119" selection-end-column="63" />
-          <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/articles/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="38" column="105" selection-start-line="38" selection-start-column="105" selection-end-line="38" selection-end-column="105" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/ArticlesType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/FabricantsType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/articles/_form.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/fabricants/_form.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/fabricants/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/articles/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/factures/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/fabricants/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="59" lean-forward="true" selection-start-line="28" selection-start-column="59" selection-end-line="28" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20181218093240.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://efbb981d-145b-462b-8d91-7fa908fdc3f3/schema/kelloggs/table/fabricants" />
-    <entry file="das://efbb981d-145b-462b-8d91-7fa908fdc3f3/schema/kelloggs/table/factures" />
-    <entry file="das://efbb981d-145b-462b-8d91-7fa908fdc3f3/schema/kelloggs/table/informations_livraisons" />
-    <entry file="das://efbb981d-145b-462b-8d91-7fa908fdc3f3/schema/kelloggs/table/compose" />
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20181214144138.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/dashboard/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="66" lean-forward="true" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20181214092228.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-639">
-          <caret line="97" column="54" selection-start-line="97" selection-start-column="34" selection-end-line="97" selection-end-column="54" />
-          <folding>
-            <element signature="e#34#56#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="180">
+          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/SecurityController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="82" column="36" lean-forward="true" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
+        <state relative-caret-position="631">
+          <caret line="91" column="45" lean-forward="true" selection-start-line="91" selection-start-column="45" selection-end-line="91" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/security/register.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/kelloggs.sql">
+    <entry file="file://$PROJECT_DIR$/src/Controller/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6560" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/uploads/fabricant/dca4473911121c2247816486ca18c3b5.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/kelloggs (1).sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-90">
-          <caret line="87" column="40" lean-forward="true" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
+        <state relative-caret-position="90">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/kelloggs (2).sql">
+    <entry file="file://$PROJECT_DIR$/src/Traits/GetNBArticlesTrait.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2325">
-          <caret line="155" column="16" selection-start-line="155" selection-start-column="16" selection-end-line="155" selection-end-column="16" />
+        <state relative-caret-position="600">
+          <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="47" selection-end-column="77" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/ArticlesRepository.php">
+    <entry file="file://$PROJECT_DIR$/templates/panier/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="33" column="46" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
+        <state relative-caret-position="284">
+          <caret line="85" column="56" selection-start-line="85" selection-start-column="56" selection-end-line="85" selection-end-column="56" />
         </state>
       </provider>
     </entry>
-    <entry file="das://efbb981d-145b-462b-8d91-7fa908fdc3f3/schema/kelloggs/table/commercial">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/filesystem/Filesystem.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="163" column="34" lean-forward="true" selection-start-line="163" selection-start-column="34" selection-end-line="163" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/articles/_delete_form.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
         <state>
-          <filtering enabled="true" />
+          <caret column="52" selection-start-column="37" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="das://efbb981d-145b-462b-8d91-7fa908fdc3f3/schema/kelloggs/table/articles">
+    <entry file="das://22429d4d-58f4-4615-8b16-12f6a496ec46/schema/kelloggs/table/articles">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://efbb981d-145b-462b-8d91-7fa908fdc3f3/schema/kelloggs/table/panier">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/FabricantsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-599">
-          <caret line="42" column="54" selection-start-line="42" selection-start-column="54" selection-end-line="42" selection-end-column="54" />
-          <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
-          </folding>
+        <state projectRestartId="454a76cd-b5d0-40a5-b007-a1da6a872294">
+          <filtering>
+            <filter text="" />
+          </filtering>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/ProfilController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3060">
-          <caret line="215" column="7" selection-start-line="215" selection-start-column="7" selection-end-line="215" selection-end-column="7" />
+        <state relative-caret-position="371">
+          <caret line="85" column="10" lean-forward="true" selection-start-line="85" selection-start-column="10" selection-end-line="85" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="das://efbb981d-145b-462b-8d91-7fa908fdc3f3/schema/kelloggs/table/utilisateur">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/config/packages/dev/easy_log_handler.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
-    <entry file="das://efbb981d-145b-462b-8d91-7fa908fdc3f3/schema/kelloggs/table/client">
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://22429d4d-58f4-4615-8b16-12f6a496ec46/schema/kelloggs/table/panier">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+        <state projectRestartId="454a76cd-b5d0-40a5-b007-a1da6a872294">
+          <filtering>
+            <filter text="" />
+          </filtering>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/PanierRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="168" column="60" selection-start-line="168" selection-start-column="60" selection-end-line="168" selection-end-column="60" />
+        <state relative-caret-position="311">
+          <caret line="112" column="20" selection-start-line="112" selection-start-column="20" selection-end-line="112" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Twig/CheckExtension.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/articles/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="72" selection-start-line="19" selection-start-column="72" selection-end-line="19" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/PanierController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="187" column="27" selection-start-line="187" selection-start-column="27" selection-end-line="187" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Compose.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="42" lean-forward="true" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/factures/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="657">
+          <caret line="88" column="32" lean-forward="true" selection-start-line="88" selection-start-column="32" selection-end-line="88" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://22429d4d-58f4-4615-8b16-12f6a496ec46/schema/kelloggs/table/informations_livraisons">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="454a76cd-b5d0-40a5-b007-a1da6a872294">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://22429d4d-58f4-4615-8b16-12f6a496ec46/schema/kelloggs/table/compose">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="454a76cd-b5d0-40a5-b007-a1da6a872294">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Factures.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/InformationsLivraisonsRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="711">
+          <caret line="80" column="44" lean-forward="true" selection-start-line="80" selection-start-column="44" selection-end-line="80" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://22429d4d-58f4-4615-8b16-12f6a496ec46/schema/kelloggs/table/factures">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="767f623e-db88-4463-b1fc-d8df335902a5">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://22429d4d-58f4-4615-8b16-12f6a496ec46/schema/kelloggs/table/utilisateur">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="767f623e-db88-4463-b1fc-d8df335902a5">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/FacturesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-552">
+          <caret line="30" column="43" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/validator.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/twig.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/translation.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/swiftmailer.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/sensio_framework_extra.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1233">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes/annotations.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/bundles.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/doctrine_migrations.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/framework.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/routing.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/framework-bundle/Controller/AbstractController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="64" column="23" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="102" column="25" lean-forward="true" selection-start-line="102" selection-start-column="25" selection-end-line="102" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/ArticlesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2055">
+          <caret line="146" column="18" selection-start-line="146" selection-start-column="18" selection-end-line="146" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/fabricants/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+        <state relative-caret-position="165">
+          <caret line="11" column="94" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="94" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/FabricantsRepository.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/FabricantsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="86" column="20" selection-start-line="86" selection-start-column="20" selection-end-line="86" selection-end-column="20" />
+        <state relative-caret-position="15">
+          <caret line="50" column="60" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
           <folding>
             <element signature="e#34#58#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/FacturesController.php">
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="74" column="7" lean-forward="true" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
+        <state relative-caret-position="105">
+          <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/PanierController.php">
+    <entry file="das://22429d4d-58f4-4615-8b16-12f6a496ec46/schema/kelloggs/table/fabricants">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="a5bcc9af-6727-4acc-b3d4-f41d633c4fa2">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/fabricants/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="168" column="35" selection-start-line="168" selection-start-column="35" selection-end-line="168" selection-end-column="35" />
+        <state relative-caret-position="180">
+          <caret line="12" column="92" selection-start-line="12" selection-start-column="92" selection-end-line="12" selection-end-column="92" />
         </state>
       </provider>
     </entry>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="kelloggs@localhost" uuid="efbb981d-145b-462b-8d91-7fa908fdc3f3">
-      <database-info product="MySQL" version="8.0.12" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e )" dbms="MYSQL" exact-version="8.0.12">
+    <data-source name="Debian" uuid="22429d4d-58f4-4615-8b16-12f6a496ec46">
+      <database-info product="MariaDB" version="10.1.38-MariaDB-0+deb9u1" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="2.4.1" dbms="MARIADB" exact-version="10.1.38" exact-driver-version="2.4">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
       </database-info>
-      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <user-name>root</user-name>
+      <user-name>kelloggs</user-name>
       <introspection-schemas>*:@</introspection-schemas>
     </data-source>
   </component>
