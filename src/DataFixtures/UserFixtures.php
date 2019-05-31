@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Client;
 use App\Entity\Commercial;
+use App\Entity\Panier;
 use App\Entity\Utilisateur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -41,6 +42,16 @@ class UserFixtures extends Fixture
         $commercial->setType(2);
         $commercial->setActif(1);
         $manager->persist($commercial);
+
+        $panier = new Panier();
+        $panier->setUtilisateur($client);
+        $panier->setArticles("[{}]");
+        $manager->persist($panier);
+
+        $panier1 = new Panier();
+        $panier1->setUtilisateur($commercial);
+        $panier1->setArticles("[{}]");
+        $manager->persist($panier1);
 
         $manager->flush();
     }

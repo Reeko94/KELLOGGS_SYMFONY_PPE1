@@ -186,7 +186,7 @@ class FabricantsController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function addOanier(Request $request) : Response
+    public function addPanier(Request $request) : Response
     {
         $panier  = $this->panierRepository->checkPanier($this->getUser());
         $idArticle = intval($request->get('id'));
