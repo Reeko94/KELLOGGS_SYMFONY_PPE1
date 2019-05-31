@@ -13,13 +13,14 @@ class TypeNutritionFixtures extends Fixture
     {
         // $product = new Product();
         // $manager->persist($product);
-        $faker = Factory::create('fr-FR');
-        for($i = 0;$i<5;$i++)
-        {
-            $type = new TypeNutrition();
-            $type->setLibelle($faker->words(1,true));
-            $manager->persist($type);
-        }
+        $type = new TypeNutrition();
+        $type->setLibelle("Sucré");
+        $manager->persist($type);
+
+        $type2 = new TypeNutrition();
+        $type2->setLibelle("Salé");
+        $manager->persist($type2);
+
         $manager->flush();
     }
 }
